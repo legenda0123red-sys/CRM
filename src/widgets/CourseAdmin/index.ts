@@ -1,0 +1,1 @@
+export {default as CourseAdmin} from './CourseAdmin';

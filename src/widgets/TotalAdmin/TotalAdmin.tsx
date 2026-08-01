@@ -1,0 +1,41 @@
+import { Courses, Student, Employees } from "../../shared/images/images";
+
+function TotalAdmin() {
+  return (
+    <>
+      <section className="total-data flex justify-between mb-12.5">
+
+        <div className="total-data__card total-data__card--students flex flex-col gap-9 bg-indigo-500 w-96 h-55 rounded-lg px-6 py-6">
+          <div className="total-data__icon w-10">
+            <img src={Student} alt="" />
+          </div>
+          <h2 className="total-data__label text-3xl font-bold text-white">
+            Total Student
+          </h2>
+          <span className="total-data__count text-2xl font-semibold text-white">1023</span>
+        </div>
+
+        <div className="total-data__card total-data__card--courses flex flex-col gap-9 bg-violet-500 w-96 h-55 rounded-lg px-6 py-6">
+           <div className="total-data__icon w-10">
+            <img src={Courses} alt="" />
+          </div>
+          <h2 className="total-data__label text-3xl font-bold text-white">
+            Total Courses
+          </h2>
+          <span className="total-data__count text-2xl font-semibold text-white">52</span>
+        </div>
+
+        <div className="total-data__card total-data__card--revenue flex flex-col gap-9 bg-fuchsia-500 w-96 h-55 rounded-lg px-6 py-6">
+           <div className="total-data__icon w-10">
+            <img src={Employees} alt="" />
+          </div>
+          <h2 className="total-data__label text-3xl font-bold text-white">
+            Total Employees
+          </h2>
+          <span className="total-data__count text-2xl font-semibold text-white">67</span>
+        </div>
+      </section>
+    </>
+  );
+}
+export default TotalAdmin;
