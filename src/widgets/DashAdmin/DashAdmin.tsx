@@ -1,95 +1,150 @@
-import { useState } from "react";
-import { Dash } from "../../shared/icons/icons";
-import { Educ } from "../../shared/icons/icons";
-import { Grad } from "../../shared/icons/icons";
-import { Chat } from "../../shared/icons/icons";
-import { Settings } from "../../shared/icons/icons";
+import { Dash, Educ, Grad, Chat, Settings } from "../../shared/icons/icons";
+import { Link, useLocation } from "react-router-dom";
 
 function DashAdmin() {
-  const [active, setActive] = useState<string>("dash");
+  const location = useLocation();
+
+  const menu = [
+    {
+      title: "Dashboard",
+      icon: Dash,
+      path: "/dashboard",
+    },
+    {
+      title: "Students",
+      icon: Grad,
+      path: "/students",
+    },
+    {
+      title: "Course",
+      icon: Educ,
+      path: "/course",
+    },
+    {
+      title: "Chat",
+      icon: Chat,
+      path: "/chat",
+    },
+  ];
+
+  const footerMenu = [
+    {
+      title: "Settings",
+      icon: Settings,
+      path: "/settings",
+    },
+  ];
+
   return (
-    <>
-      <aside className="sidebar w-70 shrink-0 bg-purple-700 text-white py-6 px-4">
-  <div className="sidebar__header flex justify-between items-center">
-    <i className="sidebar__logo fi fi-sr-graduation-cap text-4xl text-purple-500"></i>
-    <h1 className="sidebar__title text-3xl font-bold">CourseFlow</h1>
-  </div>
+    <aside className="sidebar fixed left-0 top-0 h-screen w-70 shrink-0 bg-purple-700 text-white py-6 px-4">
+      
+      
+      <div className="sidebar__header flex justify-between items-center">
+        <i className="sidebar__logo fi fi-sr-graduation-cap text-4xl text-purple-300"></i>
 
-  <div className="sidebar__menu mt-12.5 flex flex-col gap-5">
-    <div
-      className={`sidebar__item flex items-center gap-3 p-2.5 border-2 rounded-lg transition ${
-        active === "dash" ? "sidebar__item--active bg-fuchsia-600" : "hover:bg-purple-900"
-      }`}
-    >
-      <img className="sidebar__icon w-10 h-10" src={Dash} alt="" />
-      <button
-        onClick={() => setActive("dash")}
-        className="sidebar__label text-2xl font-bold text-white cursor-pointer"
-      >
-        Dashboard
-      </button>
-    </div>
+        <h1 className="sidebar__title text-3xl font-bold">
+          CourseFlow
+        </h1>
+      </div>
 
-    <div
-      className={`sidebar__item flex items-center gap-3 p-2.5 border-2 rounded-lg transition ${
-        active === "students" ? "sidebar__item--active bg-fuchsia-600" : "hover:bg-purple-900"
-      }`}
-    >
-      <img className="sidebar__icon w-10 h-10" src={Grad} alt="" />
-      <button
-        onClick={() => setActive("students")}
-        className="sidebar__label text-2xl font-bold text-white cursor-pointer"
-      >
-        Students
-      </button>
-    </div>
 
-    <div
-      className={`sidebar__item flex items-center gap-3 p-2.5 border-2 rounded-lg transition ${
-        active === "course" ? "sidebar__item--active bg-fuchsia-600" : "hover:bg-purple-900"
-      }`}
-    >
-      <img className="sidebar__icon w-10 h-10" src={Educ} alt="" />
-      <button
-        onClick={() => setActive("course")}
-        className="sidebar__label text-2xl font-bold text-white cursor-pointer"
-      >
-        Course
-      </button>
-    </div>
+      
+      <div className="sidebar__menu mt-12 flex flex-col gap-5">
 
-    <div
-      className={`sidebar__item flex items-center gap-3 p-2.5 border-2 rounded-lg transition ${
-        active === "chat" ? "sidebar__item--active bg-fuchsia-600" : "hover:bg-purple-900"
-      }`}
-    >
-      <img className="sidebar__icon w-10 h-10" src={Chat} alt="" />
-      <button
-        onClick={() => setActive("chat")}
-        className="sidebar__label text-2xl font-bold text-white cursor-pointer"
-      >
-        Chat
-      </button>
-    </div>
-  </div>
+        {menu.map((item) => (
+          <div
+            key={item.path}
+            className={`
+              sidebar__item 
+              flex 
+              items-center 
+              gap-3 
+              p-2.5 
+              border-2 
+              rounded-lg 
+              transition
+              ${
+                location.pathname === item.path
+                  ? "bg-fuchsia-600"
+                  : "hover:bg-purple-900"
+              }
+            `}
+          >
 
-  <div className="sidebar__footer mt-50">
-    <div
-      className={`sidebar__item flex items-center gap-3 p-2.5 border-2 rounded-lg transition ${
-        active === "settings" ? "sidebar__item--active bg-fuchsia-600" : "hover:bg-purple-900"
-      }`}
-    >
-      <img className="sidebar__icon w-10 h-10" src={Settings} alt="" />
-      <button
-        onClick={() => setActive("settings")}
-        className="sidebar__label text-2xl font-bold text-white cursor-pointer"
-      >
-        Settings
-      </button>
-    </div>
-  </div>
-</aside>
-    </>
+            <img
+              className="sidebar__icon w-10 h-10"
+              src={item.icon}
+              alt={item.title}
+            />
+
+            <Link
+              to={item.path}
+              className="
+                sidebar__label 
+                text-2xl 
+                font-bold 
+                text-white 
+                cursor-pointer
+              "
+            >
+              {item.title}
+            </Link>
+
+          </div>
+        ))}
+
+      </div>
+
+
+
+      <div className="sidebar__footer mt-50">
+
+        {footerMenu.map((item) => (
+          <div
+            key={item.path}
+            className={`
+              sidebar__item 
+              flex 
+              items-center 
+              gap-3 
+              p-2.5 
+              border-2 
+              rounded-lg 
+              transition
+              ${
+                location.pathname === item.path
+                  ? "bg-fuchsia-600"
+                  : "hover:bg-purple-900"
+              }
+            `}
+          >
+
+            <img
+              className="sidebar__icon w-10 h-10"
+              src={item.icon}
+              alt={item.title}
+            />
+
+            <Link
+              to={item.path}
+              className="
+                sidebar__label 
+                text-2xl 
+                font-bold 
+                text-white 
+                cursor-pointer
+              "
+            >
+              {item.title}
+            </Link>
+
+          </div>
+        ))}
+
+      </div>
+
+    </aside>
   );
 }
+
 export default DashAdmin;

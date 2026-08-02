@@ -1,9 +1,9 @@
-import { CoursesAdmin } from "../../CoursesAdmin";
 import { DashAdmin } from "../../DashAdmin";
 import { Header } from "../../Header";
+import { StudentsAll } from "../../StudentsAll";
 import { TotalAdmin } from "../../TotalAdmin";
 
-function DashLayoutAdmin() {
+function StudentsAdmin() {
   return (
     <>
       <div className="app-layout flex min-h-screen">
@@ -19,11 +19,11 @@ function DashLayoutAdmin() {
           <main className="content flex-1 bg-white py-6 px-8 overflow-x-auto">
             {/* только таблица студентов и подобный контент */}
             <TotalAdmin />
-            <CoursesAdmin />
+            <StudentsAll />
           </main>
         </div>
       </div>
     </>
   );
 }
-export default DashLayoutAdmin;
+export default StudentsAdmin;
