@@ -2,9 +2,11 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface IStudent {
     id?: number,
-  title: string;
+  name: string;
+  username: string
   phone: string;
   parentsPhone: string;
+  courses: string[]
 }
 
 interface IStudentBase {

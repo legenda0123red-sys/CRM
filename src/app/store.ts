@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { searchReducer } from '../features/SearchCourses/model/searchSlice';
 import { createCourseModalReducer } from '../features/CreateCourse/model/createSlice';
 import { createStudentReducer } from '../features/CreateStudents';
+import { searchStudentsReducer } from '../features/SearchStudents';
 
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     searchReducer,
     createCourseModalReducer,
     createStudentReducer,
+    searchStudentsReducer,
   },
 });
 
