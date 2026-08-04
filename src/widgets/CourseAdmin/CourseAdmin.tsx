@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
+import { Link } from "react-router-dom";
 function CourseAdmin() {
   const allCourses = useSelector(
     (state: RootState) => state.createCourseModalReducer.base,
@@ -71,10 +72,17 @@ function CourseAdmin() {
                 {item.time}
               </span>
             </div>
+
+             <div className="course-list__row flex justify-between">
+              <span className="course-list__label text-gray-500">📚🚀 Старт</span>
+              <span className="course-list__value font-semibold">
+                {item.startDate}
+              </span>
+            </div>
           </div>
 
           <button className="course-list__button cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition">
-            Подробнее
+            <Link to={`/dashboard/course/${item.id}`} state={item}>Подробнее</Link>
           </button>
         </div>
       ))}

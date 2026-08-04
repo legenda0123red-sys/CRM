@@ -11,6 +11,7 @@ function CreateCourse() {
     Mentors: 2,
     timing: "",
     time: "",
+    startDate: ''
   });
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector(
@@ -26,6 +27,7 @@ function CreateCourse() {
       AllStudents: 0,
       timing: "",
       time: "",
+      startDate: '',
     });
   };
 
@@ -37,16 +39,71 @@ function CreateCourse() {
         <h3 className="text-xl font-bold mb-4">Создать курс</h3>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input
-            required
-            value={database.title}
-            onChange={(e) =>
-              setDataBase({ ...database, title: e.target.value })
-            }
-            type="text"
-            placeholder="Название курса"
-            className="border p-2 rounded"
-          />
+        <div className="w-full max-w-md">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Select course
+              </label>
+
+              <div className="relative">
+                <select
+                  required
+                  name="course"
+                  onChange={(e) =>
+                    setDataBase({ ...database, title: e.target.value })
+                  }
+                  className="
+        w-full
+        appearance-none
+        bg-white
+        border
+        border-gray-200
+        rounded-xl
+        px-4
+        py-3
+        pr-10
+        text-gray-700
+        font-medium
+        shadow-sm
+        outline-none
+        cursor-pointer
+        transition
+        focus:border-indigo-500
+        focus:ring-4
+        focus:ring-indigo-100
+        hover:border-indigo-300
+      "
+                >
+                  <option>Select course</option>
+                  <option>React + TypeScript</option>
+
+                  <option>Node.js Backend</option>
+
+                  <option>NestJS Advanced</option>
+
+                  <option>Python</option>
+
+                  <option>HTML + CSS</option>
+
+                  <option>React</option>
+
+                  <option>JavaScript</option>
+                </select>
+
+                <span
+                  className="
+        absolute
+        right-4
+        top-1/2
+        -translate-y-1/2
+        text-gray-400
+        pointer-events-none
+        text-sm
+      "
+                >
+                  ▼
+                </span>
+              </div>
+            </div>
           <textarea
             required
             value={database.desc}
@@ -79,6 +136,14 @@ function CreateCourse() {
             value={database.time}
             onChange={(e) => setDataBase({ ...database, time: e.target.value })}
             type="text"
+            placeholder="17:00 - 19:00"
+            className="border p-2 rounded"
+          />
+          <input
+            required
+            value={database.startDate}
+            onChange={(e) => setDataBase({ ...database, startDate: e.target.value })}
+            type="date"
             placeholder="17:00 - 19:00"
             className="border p-2 rounded"
           />

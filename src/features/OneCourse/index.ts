@@ -1,0 +1,1 @@
+export {default as OneCourse } from './ui/OneCourse'

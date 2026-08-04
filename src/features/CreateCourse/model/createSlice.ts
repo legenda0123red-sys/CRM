@@ -7,6 +7,7 @@ export interface ICourse {
   Mentors?: number;
   timing: string;
   time: string;
+  startDate: string,
 }
 
 interface ICourseBasa {
