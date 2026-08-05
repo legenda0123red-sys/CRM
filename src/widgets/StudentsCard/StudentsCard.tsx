@@ -14,6 +14,14 @@ function StudentsCard() {
         student.name.trim().toLowerCase().includes(query)
       ))
     }, [students, searchStudents])
+
+    if (findStudents.length === 0) {
+      return(
+        <div className="ml-128">
+        <p className="text-gray-500 font-bold">Студенты не найдены.</p>
+      </div>
+      );
+    }
   return (
     <>
      {findStudents && findStudents.slice(0, 10).map((item) => (

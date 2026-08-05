@@ -1,4 +1,4 @@
-import { Dash, Educ, Grad, Chat, Settings } from "../../shared/icons/icons";
+import { Dash, Educ, Grad, Chat, Settings, Teamwork } from "../../shared/icons/icons";
 import { Link, useLocation } from "react-router-dom";
 
 function DashAdmin() {
@@ -24,6 +24,11 @@ function DashAdmin() {
       title: "Chat",
       icon: Chat,
       path: "/chat",
+    },
+    {
+      title: "Employees",
+      icon: Teamwork,
+      path: "/employees",
     },
   ];
 

@@ -7,4 +7,5 @@ export {
   openModal,
   closeModal,
   addCourse,
+  deleteCourse
 } from "./model/createSlice"; // это експорт для функций в model

@@ -8,6 +8,7 @@ export interface ICourse {
   timing: string;
   time: string;
   startDate: string,
+  lessons: string,
 }
 
 interface ICourseBasa {
@@ -32,8 +33,11 @@ const modalSlice = createSlice({
     addCourse(state, action: PayloadAction<ICourse>) {
       state.base.push(action.payload);
     },
+    deleteCourse(state, action: PayloadAction<number>){
+      state.base = state.base.filter((el) => el.id !== action.payload);
+    }
   },
 });
 
-export const { openModal, closeModal, addCourse } = modalSlice.actions;
+export const { openModal, closeModal, addCourse, deleteCourse } = modalSlice.actions;
 export const createCourseModalReducer = modalSlice.reducer;

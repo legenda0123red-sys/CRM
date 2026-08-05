@@ -11,7 +11,8 @@ function CreateCourse() {
     Mentors: 2,
     timing: "",
     time: "",
-    startDate: ''
+    startDate: '',
+    lessons: '',
   });
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector(
@@ -28,6 +29,7 @@ function CreateCourse() {
       timing: "",
       time: "",
       startDate: '',
+      lessons: '',
     });
   };
 
@@ -119,6 +121,16 @@ function CreateCourse() {
             }
             type="number"
             placeholder="Кол-во студентов"
+            className="border p-2 rounded"
+          />
+            <input
+            required
+            value={database.lessons}
+            onChange={(e) =>
+              setDataBase({ ...database, lessons: e.target.value })
+            }
+            type="text"
+            placeholder="Кол-во уроков"
             className="border p-2 rounded"
           />
           <input

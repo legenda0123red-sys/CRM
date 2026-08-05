@@ -19,7 +19,11 @@ function CourseAdmin() {
   }, [allCourses, searchCourse]);
 
   if (visibleCourses.length === 0) {
-    return <p className=" text-gray-500">Курсы не найдены.</p>;
+    return (
+      <div className="ml-128">
+        <p className="text-gray-500 font-bold">Курсы не найдены.</p>
+      </div>
+    );
   }
 
   return (
@@ -73,8 +77,10 @@ function CourseAdmin() {
               </span>
             </div>
 
-             <div className="course-list__row flex justify-between">
-              <span className="course-list__label text-gray-500">📚🚀 Старт</span>
+            <div className="course-list__row flex justify-between">
+              <span className="course-list__label text-gray-500">
+                📚🚀 Старт
+              </span>
               <span className="course-list__value font-semibold">
                 {item.startDate}
               </span>
@@ -82,7 +88,9 @@ function CourseAdmin() {
           </div>
 
           <button className="course-list__button cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition">
-            <Link to={`/dashboard/course/${item.id}`} state={item}>Подробнее</Link>
+            <Link to={`/dashboard/course/${item.id}`} state={item}>
+              Подробнее
+            </Link>
           </button>
         </div>
       ))}
