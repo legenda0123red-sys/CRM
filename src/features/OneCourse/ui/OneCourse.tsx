@@ -1,7 +1,8 @@
 import { DashAdmin } from "../../../widgets/DashAdmin";
 import { Header } from "../../../widgets/Header";
-import OneCourseCard from "../../../widgets/OneCourseCard/OneCourseCard";
+import { OneCourseCard } from "../../../widgets/OneCourseCard";
 import { TotalAdmin } from "../../../widgets/TotalAdmin";
+import { AssignStudent } from "../../AssignStudent";
 function OneCourse() {
     return(
         <>
@@ -18,6 +19,7 @@ function OneCourse() {
           <main className="content flex-1 bg-white py-6 px-8 overflow-x-auto">
             {/* только таблица студентов и подобный контент */}
             <TotalAdmin />
+            <AssignStudent />
             <section className="oneCourse-card">
               <OneCourseCard />
             </section>

@@ -11,8 +11,9 @@ function CreateCourse() {
     Mentors: 2,
     timing: "",
     time: "",
-    startDate: '',
-    lessons: '',
+    startDate: "",
+    lessons: "",
+    studentIds: [],
   });
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector(
@@ -20,16 +21,20 @@ function CreateCourse() {
   );
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(database);
+    
     dispatch(addCourse({ ...database, id: Date.now() }));
     dispatch(closeModal());
     setDataBase({
+      id: 0,
       title: "",
       desc: "",
       AllStudents: 0,
       timing: "",
       time: "",
-      startDate: '',
-      lessons: '',
+      startDate: "",
+      lessons: "",
+      studentIds: [],
     });
   };
 
@@ -41,19 +46,19 @@ function CreateCourse() {
         <h3 className="text-xl font-bold mb-4">Создать курс</h3>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="w-full max-w-md">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Select course
-              </label>
+          <div className="w-full max-w-md">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Select course
+            </label>
 
-              <div className="relative">
-                <select
-                  required
-                  name="course"
-                  onChange={(e) =>
-                    setDataBase({ ...database, title: e.target.value })
-                  }
-                  className="
+            <div className="relative">
+              <select
+                required
+                name="course"
+                onChange={(e) =>
+                  setDataBase({ ...database, title: e.target.value })
+                }
+                className="
         w-full
         appearance-none
         bg-white
@@ -74,25 +79,25 @@ function CreateCourse() {
         focus:ring-indigo-100
         hover:border-indigo-300
       "
-                >
-                  <option>Select course</option>
-                  <option>React + TypeScript</option>
+              >
+                <option>Select course</option>
+                <option>React + TypeScript</option>
 
-                  <option>Node.js Backend</option>
+                <option>Node.js Backend</option>
 
-                  <option>NestJS Advanced</option>
+                <option>NestJS Advanced</option>
 
-                  <option>Python</option>
+                <option>Python</option>
 
-                  <option>HTML + CSS</option>
+                <option>HTML + CSS</option>
 
-                  <option>React</option>
+                <option>React</option>
 
-                  <option>JavaScript</option>
-                </select>
+                <option>JavaScript</option>
+              </select>
 
-                <span
-                  className="
+              <span
+                className="
         absolute
         right-4
         top-1/2
@@ -101,11 +106,11 @@ function CreateCourse() {
         pointer-events-none
         text-sm
       "
-                >
-                  ▼
-                </span>
-              </div>
+              >
+                ▼
+              </span>
             </div>
+          </div>
           <textarea
             required
             value={database.desc}
@@ -123,7 +128,7 @@ function CreateCourse() {
             placeholder="Кол-во студентов"
             className="border p-2 rounded"
           />
-            <input
+          <input
             required
             value={database.lessons}
             onChange={(e) =>
@@ -154,7 +159,9 @@ function CreateCourse() {
           <input
             required
             value={database.startDate}
-            onChange={(e) => setDataBase({ ...database, startDate: e.target.value })}
+            onChange={(e) =>
+              setDataBase({ ...database, startDate: e.target.value })
+            }
             type="date"
             placeholder="17:00 - 19:00"
             className="border p-2 rounded"

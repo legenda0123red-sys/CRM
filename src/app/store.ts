@@ -3,6 +3,8 @@ import { searchReducer } from '../features/SearchCourses/model/searchSlice';
 import { createCourseModalReducer } from '../features/CreateCourse/model/createSlice';
 import { createStudentReducer } from '../features/CreateStudents';
 import { searchStudentsReducer } from '../features/SearchStudents';
+import { AssignStudentReducer } from '../features/AssignStudent/model/AssignStudentSlice';
+import { AssignSearchReducer } from '../features/AssignSearch';
 
 
 export const store = configureStore({
@@ -11,6 +13,8 @@ export const store = configureStore({
     createCourseModalReducer,
     createStudentReducer,
     searchStudentsReducer,
+    AssignStudentReducer,
+    AssignSearchReducer
   },
 });
 

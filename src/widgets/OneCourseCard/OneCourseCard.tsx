@@ -3,6 +3,7 @@ import { deleteCourse } from "../../features/CreateCourse/model/createSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../app/store";
 import { TeacherCard } from "../TeacherCard";
+import { OpenW } from "../../features/AssignStudent";
 function OneCourseCard() {
   const dispatch = useDispatch<AppDispatch>();
   const students = useSelector(
@@ -84,6 +85,10 @@ function OneCourseCard() {
             >
               Удалить
             </button>
+
+            <button
+            onClick={() => dispatch(OpenW(Number(course.id)))}
+             className="rounded-xl px-6 py-3 bg-gray-700 text-white font-semibold hover:bg-gray-800">Add Students</button>
 
             <button className="px-6 py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600">
               <Link to="/dashboard">↩ Back</Link>
