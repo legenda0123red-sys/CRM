@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { closeW } from "../model/AssignStudentSlice";
 import { AssignSearch } from "../../AssignSearch";
+import { AssignStudentCard } from "../../../widgets/AssignStudentCard";
 
 function AssignStudent() {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,85 +37,7 @@ function AssignStudent() {
           </div>
 
           <div className="mt-5 flex flex-col gap-3 max-h-80 overflow-y-auto">
-            <div
-              className="
-          flex
-          items-center
-          justify-between
-          p-4
-          rounded-xl
-          border
-          hover:bg-gray-50
-          cursor-pointer
-        "
-            >
-              <div className="flex items-center gap-4">
-                <img
-                  src="https://i.pravatar.cc/150?img=12"
-                  className="
-              w-12
-              h-12
-              rounded-full
-              object-cover
-            "
-                />
-
-                <div>
-                  <h3 className="font-semibold">Санжар Абдырахманов</h3>
-
-                  <p className="text-sm text-gray-500">Frontend Developer</p>
-                </div>
-              </div>
-
-              <input
-                type="checkbox"
-                className="
-            w-5
-            h-5
-            accent-cyan-600
-          "
-              />
-            </div>
-
-            <div
-              className="
-          flex
-          items-center
-          justify-between
-          p-4
-          rounded-xl
-          border
-          hover:bg-gray-50
-          cursor-pointer
-        "
-            >
-              <div className="flex items-center gap-4">
-                <img
-                  src="https://i.pravatar.cc/150?img=20"
-                  className="
-              w-12
-              h-12
-              rounded-full
-              object-cover
-            "
-                />
-
-                <div>
-                  <h3 className="font-semibold">Айбек</h3>
-
-                  <p className="text-sm text-gray-500">React Student</p>
-                </div>
-              </div>
-
-              <input
-                type="checkbox"
-                className="
-            w-5
-            h-5
-            accent-cyan-600
-          "
-              />
-            </div>
+        <AssignStudentCard />
           </div>
 
           <div className="flex justify-end gap-3 mt-6">
