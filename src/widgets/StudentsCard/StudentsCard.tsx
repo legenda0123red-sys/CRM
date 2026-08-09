@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { i18n } from "../../shared/lib/i18n";
 
 function StudentsCard() {
+  const {t} = useTranslation('course')
     const students = useSelector((state: RootState) => state.createStudentReducer.students);
 
     const searchStudents = useSelector((state: RootState) => state.searchStudentsReducer.search);
@@ -17,15 +20,19 @@ function StudentsCard() {
 
     if (findStudents.length === 0) {
       return(
-        <div className="ml-128">
-        <p className="text-gray-500 font-bold">Студенты не найдены.</p>
+        <div
+        key={i18n.language}
+        className="ml-128">
+        <p className="language-fade text-gray-500 font-bold">{t('NotFoundStudents')}</p>
       </div>
       );
     }
   return (
     <>
      {findStudents && findStudents.slice(0, 10).map((item) => (
-         <div className="w-70  bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
+         <div
+         key={i18n.language}
+         className="language-fade w-70  bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
         
         <div className="bg-linear-to-r from-indigo-500 to-purple-600 h-28 relative  rounded-lg">
           <div className="absolute -bottom-10 left-6">

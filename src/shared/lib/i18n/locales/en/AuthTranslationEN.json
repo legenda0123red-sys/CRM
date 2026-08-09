@@ -1,0 +1,38 @@
+{
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your account",
+    "email": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "remember": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "submit": "Sign in",
+    "noAccount": "Don't have an account?",
+    "register": "Create an account"
+  },
+  "register": {
+    "title": "Create an account",
+    "subtitle": "Fill in your details to register",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "password": "Password",
+    "passwordPlaceholder": "Minimum 8 characters",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "terms": "I accept the",
+    "termsLink": "terms of use",
+    "submit": "Create account",
+    "hasAccount": "Already have an account?",
+    "login": "Sign in"
+  },
+  "common": {
+    "brand": "CourseFlow",
+    "description": "Course and student management",
+    "crmDescription": "Create an account to work with CRM",
+    "copyright": "© 2026 CourseFlow CRM"
+  }
+}

@@ -1,27 +1,29 @@
-import { Dash,  Grad, Chat, Settings, Teamwork } from "../../shared/icons/icons";
+import { useTranslation } from "react-i18next";
+import { Dash, Grad, Chat, Settings, Teamwork } from "../../shared/icons/icons";
 import { Link, useLocation } from "react-router-dom";
 
 function DashAdmin() {
   const location = useLocation();
+  const { t, i18n } = useTranslation("dashboard");
 
   const menu = [
     {
-      title: "Dashboard",
+      title: t("dashboard"),
       icon: Dash,
       path: "/dashboard",
     },
     {
-      title: "Students",
+      title: t("students"),
       icon: Grad,
       path: "/students",
     },
     {
-      title: "Chat",
+      title: t("chat"),
       icon: Chat,
       path: "/chat",
     },
     {
-      title: "Employees",
+      title: t("employees"),
       icon: Teamwork,
       path: "/employees",
     },
@@ -29,28 +31,23 @@ function DashAdmin() {
 
   const footerMenu = [
     {
-      title: "Settings",
+      title: t('settings'),
       icon: Settings,
       path: "/settings",
     },
   ];
 
   return (
-    <aside className="sidebar fixed left-0 top-0 h-screen w-70 shrink-0 bg-purple-700 text-white py-6 px-4">
-      
-      
+    <aside
+    key={i18n.language}
+    className="language-fade sidebar fixed left-0 top-0 h-screen w-70 shrink-0 bg-purple-700 text-white py-6 px-4">
       <div className="sidebar__header flex justify-between items-center">
         <i className="sidebar__logo fi fi-sr-graduation-cap text-4xl text-purple-300"></i>
 
-        <h1 className="sidebar__title text-3xl font-bold">
-          CourseFlow
-        </h1>
+        <h1 className="sidebar__title text-3xl font-bold">CourseFlow</h1>
       </div>
 
-
-      
       <div className="sidebar__menu mt-12 flex flex-col gap-5">
-
         {menu.map((item) => (
           <div
             key={item.path}
@@ -70,7 +67,6 @@ function DashAdmin() {
               }
             `}
           >
-
             <img
               className="sidebar__icon w-10 h-10"
               src={item.icon}
@@ -89,16 +85,11 @@ function DashAdmin() {
             >
               {item.title}
             </Link>
-
           </div>
         ))}
-
       </div>
 
-
-
       <div className="sidebar__footer mt-50">
-
         {footerMenu.map((item) => (
           <div
             key={item.path}
@@ -118,7 +109,6 @@ function DashAdmin() {
               }
             `}
           >
-
             <img
               className="sidebar__icon w-10 h-10"
               src={item.icon}
@@ -137,12 +127,9 @@ function DashAdmin() {
             >
               {item.title}
             </Link>
-
           </div>
         ))}
-
       </div>
-
     </aside>
   );
 }

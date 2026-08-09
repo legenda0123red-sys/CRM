@@ -2,7 +2,9 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 function CourseAdmin() {
+  const {t, i18n} = useTranslation('course')
   const allCourses = useSelector(
     (state: RootState) => state.createCourseModalReducer.base,
   );
@@ -20,8 +22,10 @@ function CourseAdmin() {
 
   if (visibleCourses.length === 0) {
     return (
-      <div className="ml-128">
-        <p className="text-gray-500 font-bold">Курсы не найдены.</p>
+      <div
+      key={i18n.language}
+      className="ml-128 language-fade">
+        <p className="text-gray-500 font-bold">{t('notFound')}</p>
       </div>
     );
   }
@@ -30,8 +34,8 @@ function CourseAdmin() {
     <>
       {visibleCourses.map((item) => (
         <div
-          key={item.id}
-          className="course-list__item bg-white rounded-xl p-5 shadow-md w-72 flex flex-col gap-5 cursor-pointer hover:shadow-xl transition"
+         key={`${item.id}-${i18n.language}`}
+          className="animate-language-fade course-list__item bg-white rounded-xl p-5 shadow-md w-72 flex flex-col gap-5 cursor-pointer hover:shadow-xl transition"
         >
           <div className="course-list__header">
             <h2 className="course-list__title text-2xl font-bold text-slate-800">
@@ -45,7 +49,7 @@ function CourseAdmin() {
           <div className="course-list__info flex flex-col gap-3 text-[15px]">
             <div className="course-list__row flex justify-between">
               <span className="course-list__label text-gray-500">
-                👨‍🎓 Студентов
+                👨‍🎓 {t('students')}
               </span>
               <span className="course-list__value font-semibold">
                 {item.AllStudents}
@@ -54,7 +58,7 @@ function CourseAdmin() {
 
             <div className="course-list__row flex justify-between">
               <span className="course-list__label text-gray-500">
-                👨‍🏫 Преподавателей
+                👨‍🏫 {t('teachers')}
               </span>
               <span className="course-list__value font-semibold">
                 {item.Mentors}
@@ -63,7 +67,7 @@ function CourseAdmin() {
 
             <div className="course-list__row flex justify-between">
               <span className="course-list__label text-gray-500">
-                📅 Расписание
+                📅 {t('schedule')}
               </span>
               <span className="course-list__value font-semibold">
                 {item.timing}
@@ -71,7 +75,7 @@ function CourseAdmin() {
             </div>
 
             <div className="course-list__row flex justify-between">
-              <span className="course-list__label text-gray-500">🕒 Время</span>
+              <span className="course-list__label text-gray-500">🕒 {t('time')}</span>
               <span className="course-list__value font-semibold">
                 {item.time}
               </span>
@@ -79,7 +83,7 @@ function CourseAdmin() {
 
             <div className="course-list__row flex justify-between">
               <span className="course-list__label text-gray-500">
-                📚🚀 Старт
+                📚🚀 {t('start')}
               </span>
               <span className="course-list__value font-semibold">
                 {item.startDate}
@@ -89,7 +93,7 @@ function CourseAdmin() {
 
           <button className="course-list__button cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition">
             <Link to={`/dashboard/course/${item.id}`} state={item}>
-              Подробнее
+             {t('details')}
             </Link>
           </button>
         </div>

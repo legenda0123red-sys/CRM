@@ -8,6 +8,7 @@ import { NotFound } from "./widgets/NotFound";
 function App(){
     return (
         <Routes>
+            <Route path="/" element={<Registr />}/>
             <Route path="/dashboard" element={<Home />}/>
             <Route path="/students" element={<StudentsAdmin />}/>
             <Route path="/chat" element={<StudentsAdmin />}/>

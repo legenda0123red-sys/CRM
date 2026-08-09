@@ -1,0 +1,6 @@
+import DashTranslationRu from "./DashTranslationRU.json";
+import TotalTableRu from "./TotalTableRU.json";
+import ControlsRu from "./ControlsRU.json";
+import AuthRU from './AuthTranslationRU.json';
+import CourseRU from './CourseRU.json'
+export { DashTranslationRu, TotalTableRu, ControlsRu, AuthRU, CourseRU };

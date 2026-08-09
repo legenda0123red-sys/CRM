@@ -1,0 +1,39 @@
+{
+  "login": {
+    "control": " Управление курсами и студентами",
+    "title": "Добро пожаловать",
+    "subtitle": "Войдите в свой аккаунт",
+    "email": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "remember": "Запомнить меня",
+    "forgotPassword": "Забыли пароль?",
+    "submit": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "register": "Зарегистрироваться"
+  },
+  "register": {
+    "title": "Создать аккаунт",
+    "subtitle": "Заполните данные для регистрации",
+    "name": "Имя",
+    "namePlaceholder": "Ваше имя",
+    "email": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Минимум 8 символов",
+    "confirmPassword": "Подтвердите пароль",
+    "confirmPasswordPlaceholder": "Повторите пароль",
+    "terms": "Я принимаю",
+    "termsLink": "условия использования",
+    "submit": "Создать аккаунт",
+    "hasAccount": "Уже есть аккаунт?",
+    "login": "Войти"
+  },
+  "common": {
+    "brand": "CourseFlow",
+    "description": "Управление курсами и студентами",
+    "crmDescription": "Создайте аккаунт для работы с CRM",
+    "copyright": "© 2026 CourseFlow CRM"
+  }
+}

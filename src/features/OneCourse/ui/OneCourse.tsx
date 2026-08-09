@@ -15,7 +15,7 @@ function OneCourse() {
             {/* поиск, аватар, уведомления и т.д. */}
             <Header />
           </header>
-
+ 
           <main className="content flex-1 bg-white py-6 px-8 overflow-x-auto">
             {/* только таблица студентов и подобный контент */}
             <TotalAdmin />

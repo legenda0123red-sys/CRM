@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { search } from "../model/searchSlice";
+import { useTranslation } from "react-i18next";
 
 function SearchCourse() {
   const dispatch = useDispatch<AppDispatch>();
@@ -9,13 +10,16 @@ function SearchCourse() {
     (state: RootState) => state.searchReducer.search,
   );
 
+  const {t, i18n} = useTranslation('controls')
+
   return (
     <input
+    key={i18n.language}
       value={searchCourse}
       onChange={(e) => dispatch(search(e.target.value))}
-      className="w-105 p-4 border rounded-lg"
+      className="language-fade w-110 p-4 border rounded-lg"
       type="search"
-      placeholder="Поиск..."
+      placeholder={`${t('search')} ...`}
     />
   );
 }

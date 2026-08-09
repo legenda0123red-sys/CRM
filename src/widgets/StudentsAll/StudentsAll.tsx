@@ -1,14 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { CreateStudents } from "../../features/CreateStudents";
 import { SearchStudents } from "../../features/SearchStudents";
 import { AddStudentBtn } from "../AddStudentBtn";
 import StudentsCard from "../StudentsCard/StudentsCard";
 
 function StudentsAll() {
+  const {t, i18n} = useTranslation('controls')
   return (
     <>
       <section className="students">
         <div className="students__menu mb-10 flex justify-between items-center">
-          <h2 className="students__title  text-2xl font-bold">Students</h2>
+          <h2
+          key={i18n.language}
+          className="language-fade students__title  text-2xl font-bold">{t('studentsTitle')}</h2>
           <SearchStudents />
           <AddStudentBtn />
           <CreateStudents />
