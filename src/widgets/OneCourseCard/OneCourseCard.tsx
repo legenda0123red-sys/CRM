@@ -6,7 +6,7 @@ import { TeacherCard } from "../TeacherCard";
 import { OpenW } from "../../features/AssignStudent";
 import { useTranslation } from "react-i18next";
 function OneCourseCard() {
-  const {t} = useTranslation('course')
+  const {t, i18n} = useTranslation('course')
   const dispatch = useDispatch<AppDispatch>();
   const students = useSelector(
     (state: RootState) => state.createStudentReducer.students,
@@ -21,7 +21,9 @@ function OneCourseCard() {
 
   if (!course) {
     return (
-      <div className="text-center">
+      <div
+      key={i18n.language}
+      className="language-fade text-center">
         <h2 className="text-gray-500 text-lg font-bold mb-5">{t('dataNotFound')}</h2>
           <button className="px-6 py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600">
               <Link to="/dashboard">↩ {t('back')}</Link>
@@ -32,7 +34,9 @@ function OneCourseCard() {
 
   return (
     <>
-      <div className="flex gap-8 bg-white rounded-2xl shadow-lg border border-gray-200 p-6 ">
+      <div
+      key={i18n.language}
+      className="language-fade flex gap-8 bg-white rounded-2xl shadow-lg border border-gray-200 p-6 ">
         <div className="flex flex-col flex-1">
           <h2 className="text-3xl font-bold">{course.title}</h2>
 
@@ -90,7 +94,7 @@ function OneCourseCard() {
 
             <button
             onClick={() => dispatch(OpenW(Number(course.id)))}
-             className="rounded-xl px-6 py-3 bg-gray-700 text-white font-semibold hover:bg-gray-800">Add Students</button>
+             className="rounded-xl px-6 py-3 bg-gray-700 text-white font-semibold hover:bg-gray-800">{t('addStudents')}</button>
 
             <button className="px-6 py-3 rounded-xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600">
               <Link to="/dashboard">↩ {t('back')}</Link>

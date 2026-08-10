@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 function Header() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation("course");
   const changeLng = (lng: string) => {
     i18n.changeLanguage(lng);
   };
@@ -52,6 +53,23 @@ function Header() {
               EN
             </button>
           </div>
+        </div>
+        <div 
+        key={i18n.language}
+        className="language-fade flex gap-6"
+        >
+          <Link
+            to="/registr"
+            className=" px-5 py-2 rounded-lg bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition"
+          >
+            {t("Registr")}
+          </Link>
+          <Link
+            to="/login"
+            className=" px-5 py-2 rounded-lg bg-purple-500 text-white font-semibold hover:bg-purple-600 transition"
+          >
+            {t("Login")}
+          </Link>
         </div>
       </div>
     </>

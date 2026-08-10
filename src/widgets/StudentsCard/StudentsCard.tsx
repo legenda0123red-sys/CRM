@@ -2,10 +2,10 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { i18n } from "../../shared/lib/i18n";
+
 
 function StudentsCard() {
-  const {t} = useTranslation('course')
+  const {t, i18n} = useTranslation('course')
     const students = useSelector((state: RootState) => state.createStudentReducer.students);
 
     const searchStudents = useSelector((state: RootState) => state.searchStudentsReducer.search);
@@ -41,7 +41,7 @@ function StudentsCard() {
                 {item.name[0].toUpperCase()} {item.username[0].toUpperCase()}
               </div>
             </div>
-          </div>
+          </div> 
         </div>
 
         <div className="pt-14 px-6 pb-6">
@@ -62,10 +62,10 @@ function StudentsCard() {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center">
                 📱
-              </div>
+              </div> 
 
               <div>
-                <p className="text-xs text-gray-400">Phone</p>
+                <p className="text-xs text-gray-400">{t('phone')}</p>
 
                 <p className="font-medium text-gray-700">+{item.phone}</p>
               </div>
@@ -77,7 +77,7 @@ function StudentsCard() {
               </div>
 
               <div>
-                <p className="text-xs text-gray-400">Parents phone</p>
+                <p className="text-xs text-gray-400">{t('ParentsPhone')}</p>
 
                 <p className="font-medium text-gray-700">+{item.parentsPhone}</p>
               </div>
@@ -89,7 +89,7 @@ function StudentsCard() {
               </div>
 
               <div>
-                <p className="text-xs text-gray-400">Course</p>
+                <p className="text-xs text-gray-400">{t('Course')}</p>
 
                 <p className="font-medium text-gray-700">{item.courses}</p>
               </div>

@@ -12,13 +12,15 @@ i18n
             controls: en.ControlsEn,
             auth: en.AuthEN,
             course: en.CourseEN,
+            errors: en.ErrorsEN,
         },
         ru: {
             dashboard: ru.DashTranslationRu,
             total: ru.TotalTableRu,
             controls: ru.ControlsRu,
             auth: ru.AuthRU,
-            course: ru.CourseRU
+            course: ru.CourseRU,
+            errors: ru.ErrorsRu,
         },
     },
     lng: "en",

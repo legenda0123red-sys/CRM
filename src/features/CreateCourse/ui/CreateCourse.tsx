@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { closeModal, addCourse, type ICourse } from "../model/createSlice";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function CreateCourse() {
+  const {t, i18n} = useTranslation('course');
   const [database, setDataBase] = useState<ICourse>({
     title: "",
     desc: "",
@@ -41,14 +43,16 @@ function CreateCourse() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div
+    key={i18n.language}
+    className="language-fade fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 w-100">
-        <h3 className="text-xl font-bold mb-4">Создать курс</h3>
+        <h3 className="text-xl font-bold mb-4">{t('CreateCourse')}</h3>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div className="w-full max-w-md">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Select course
+              {t('StudentCourse')}
             </label>
 
             <div className="relative">
@@ -80,7 +84,7 @@ function CreateCourse() {
         hover:border-indigo-300
       "
               >
-                <option>Select course</option>
+                <option>{t('StudentCourse')}</option>
                 <option>React + TypeScript</option>
 
                 <option>Node.js Backend</option>
@@ -115,7 +119,7 @@ function CreateCourse() {
             required
             value={database.desc}
             onChange={(e) => setDataBase({ ...database, desc: e.target.value })}
-            placeholder="Описание"
+            placeholder={t('CourseDesc')}
             className="border p-2 rounded"
           />
           <input
@@ -125,7 +129,7 @@ function CreateCourse() {
               setDataBase({ ...database, AllStudents: Number(e.target.value) })
             }
             type="number"
-            placeholder="Кол-во студентов"
+            placeholder={t('CourseStudents')}
             className="border p-2 rounded"
           />
           <input
@@ -135,7 +139,7 @@ function CreateCourse() {
               setDataBase({ ...database, lessons: e.target.value })
             }
             type="text"
-            placeholder="Кол-во уроков"
+            placeholder={t('CourseLessons')}
             className="border p-2 rounded"
           />
           <input
@@ -145,7 +149,7 @@ function CreateCourse() {
               setDataBase({ ...database, timing: e.target.value })
             }
             type="text"
-            placeholder="Расписание курсов"
+            placeholder={t('ScheduleLessons')}
             className="border p-2 rounded"
           />
           <input
@@ -163,14 +167,13 @@ function CreateCourse() {
               setDataBase({ ...database, startDate: e.target.value })
             }
             type="date"
-            placeholder="17:00 - 19:00"
             className="border p-2 rounded"
           />
           <button
             type="submit"
             className="bg-purple-900 text-white p-2 rounded cursor-pointer font-semibold"
           >
-            Создать
+            {t('StudentCreateBtn')}
           </button>
         </form>
 
@@ -178,7 +181,7 @@ function CreateCourse() {
           onClick={() => dispatch(closeModal())}
           className="mt-3 text-gray-500 cursor-pointer"
         >
-          Закрыть
+          {t('StudentCloseBtn')}
         </button>
       </div>
     </div>

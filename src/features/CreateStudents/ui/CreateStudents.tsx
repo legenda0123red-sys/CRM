@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addStudent, closeWindow, type IStudent } from "../model/createStudent";
 import { useState } from "react";
 import type { AppDispatch, RootState } from "../../../app/store";
+import { useTranslation } from "react-i18next";
 function CreateStudents() {
+  const {t, i18n} = useTranslation('course');
   const dispatch = useDispatch<AppDispatch>();
   const IsOpen = useSelector(
     (state: RootState) => state.createStudentReducer.Open,
@@ -41,9 +43,11 @@ function CreateStudents() {
   if (!IsOpen) return null;
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div
+      key={i18n.language}
+      className="language-fade fixed inset-0 bg-black/50 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg p-6 w-100">
-          <h3 className="text-xl font-bold mb-4">Создать студента</h3>
+          <h3 className="text-xl font-bold mb-4">{t('CreateStudent')}</h3>
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
               required
@@ -51,7 +55,7 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, name: e.target.value })
               }
-              placeholder="Имя студента"
+              placeholder={t('StudentName')}
               className=" border p-2 rounded"
               type="text"
             />
@@ -61,7 +65,7 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, username: e.target.value })
               }
-              placeholder="Фамилия студента"
+              placeholder={t('StudentUsername')}
               className=" border p-2 rounded"
               type="text"
             />
@@ -72,7 +76,7 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, phone: e.target.value })
               }
-              placeholder="Номер студента"
+              placeholder={t('StudentNumber')}
               className=" border p-2 rounded"
               type="text"
             />
@@ -82,13 +86,13 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, parentsPhone: e.target.value })
               }
-              placeholder="Номер родителей"
+              placeholder={t('StudentParentNumber')}
               className=" border p-2 rounded"
               type="text"
             />
             <div className="w-full max-w-md">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Select course
+                {t('StudentCourse')}
               </label>
 
               <div className="relative">
@@ -120,7 +124,7 @@ function CreateStudents() {
         hover:border-indigo-300
       "
                 >
-                  <option>Select course</option>
+                  <option>{t('StudentCourse')}</option>
                   <option>React + TypeScript</option>
 
                   <option>Node.js Backend</option>
@@ -155,14 +159,14 @@ function CreateStudents() {
               className="bg-purple-900 text-white p-2 rounded cursor-pointer font-semibold"
               type="submit"
             >
-              Создать
+              {t('StudentCreateBtn')}
             </button>
           </form>
           <button
             onClick={() => dispatch(closeWindow())}
             className="mt-3 text-gray-500 cursor-pointer"
           >
-            Закрыть
+            {t('StudentCloseBtn')}
           </button>
         </div>
       </div>
