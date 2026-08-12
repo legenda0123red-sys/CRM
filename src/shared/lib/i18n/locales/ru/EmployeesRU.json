@@ -1,0 +1,13 @@
+{
+    "Employees": "Сотрудники",
+    "EmployeesTeem": "человек в команде",
+    "Managers": "Менеджеров",
+    "Teachers": "Преподавателя",
+    "Curators": "Куратора",
+    "AddEmployee": "Добавить сотрудника",
+      "Employee": "Сотрудник",
+    "EmployeeRole": "Роль",
+    "EmployeeStudents": "Студенты",
+    "EmployeeStatus": "Статус",
+    "Send again": "Отправить снова"
+}

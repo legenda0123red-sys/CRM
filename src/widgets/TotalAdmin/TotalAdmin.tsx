@@ -48,7 +48,7 @@ function TotalAdmin() {
             {t("employees")}
           </h2>
           <span className="total-data__count text-2xl font-semibold text-white">
-            67
+            {/* Число сотрудников */} 0
           </span>
         </div>
       </section>

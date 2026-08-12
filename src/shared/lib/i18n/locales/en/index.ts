@@ -4,4 +4,5 @@ import ControlsEn from "./ControlsEN.json";
 import AuthEN from './AuthTranslationEN.json';
 import CourseEN from './CourseEN.json';
 import ErrorsEN from './ErrorsEN.json';
-export { DashTranslationEn, TotalTableEN, ControlsEn, AuthEN, CourseEN, ErrorsEN };
+import EmployeesEN from './EmployeesEN.json'
+export { DashTranslationEn, TotalTableEN, ControlsEn, AuthEN, CourseEN, ErrorsEN, EmployeesEN };

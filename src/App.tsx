@@ -5,6 +5,7 @@ import { StudentsAdmin } from "./widgets/StudentsAdmin";
 import { Home } from "./pages/Home";
 import { OneCourse } from "./features/OneCourse";
 import { NotFound } from "./widgets/NotFound";
+import { EmployeesAdmin } from "./widgets/EmployeesAdmin";
 function App(){
     return (
         <Routes>
@@ -17,6 +18,7 @@ function App(){
             <Route path="/registr" element={<Registr />}/>
             <Route path="/dashboard/course/:id" element={<OneCourse />}/>
             <Route path="/login" element={<Login />}/>
+            <Route path="/employees" element={<EmployeesAdmin />}/>
             <Route path="*" element={<NotFound />}/>
         </Routes>
     )

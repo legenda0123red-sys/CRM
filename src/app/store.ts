@@ -5,6 +5,7 @@ import { createStudentReducer } from '../features/CreateStudents';
 import { searchStudentsReducer } from '../features/SearchStudents';
 import { AssignStudentReducer } from '../features/AssignStudent/model/AssignStudentSlice';
 import { AssignSearchReducer } from '../features/AssignSearch';
+import { statusReducer } from '../features/EmployeesCards';
 
 
 export const store = configureStore({
@@ -14,7 +15,8 @@ export const store = configureStore({
     createStudentReducer,
     searchStudentsReducer,
     AssignStudentReducer,
-    AssignSearchReducer
+    AssignSearchReducer,
+    statusReducer
   },
 });
 
