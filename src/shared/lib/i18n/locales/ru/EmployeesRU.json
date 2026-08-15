@@ -9,5 +9,16 @@
     "EmployeeRole": "Роль",
     "EmployeeStudents": "Студенты",
     "EmployeeStatus": "Статус",
-    "Send again": "Отправить снова"
+    "Send again": "Отправить снова",
+    "NewEmployee": "Новый сотрудник",
+    "InfoEmployee": "Имя и фамилия",
+    "Email": "Почта",
+    "Manager": "Менеджер",
+    "Teacher": "Преподаватель",
+    "Curator": "Куратор",
+    "Administrator": "Администратор",
+    "EmailMessage": "На указанный email придёт приглашение со ссылкой. Сотрудник сам подтвердит почту и придумает пароль — роль уже будет назначена.",
+    "Cancel": "Отмена",
+    "SendGmail": "Отправить приглашение",
+    "SelectRole": "Выберите роль"
 }

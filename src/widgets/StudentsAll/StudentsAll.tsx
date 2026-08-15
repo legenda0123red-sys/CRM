@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import { CreateStudents } from "../../features/CreateStudents";
 import { SearchStudents } from "../../features/SearchStudents";
 import { AddStudentBtn } from "../AddStudentBtn";
-import StudentsCard from "../StudentsCard/StudentsCard";
+import StudentsCard from "../../entities/student/ui/StudentCard";
+
 
 function StudentsAll() {
   const {t, i18n} = useTranslation('controls')

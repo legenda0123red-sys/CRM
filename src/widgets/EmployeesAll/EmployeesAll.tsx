@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { EmployeesBtn } from "../EmployeesBtn";
+import { CreateEmployees } from "../../features/CreateEmployees";
 
 function EmployeesAll() {
     const {t, i18n} = useTranslation('employees');
@@ -15,6 +16,7 @@ function EmployeesAll() {
           </p>
         </div>
         <EmployeesBtn />
+        <CreateEmployees />
       </div>
     </>
   );

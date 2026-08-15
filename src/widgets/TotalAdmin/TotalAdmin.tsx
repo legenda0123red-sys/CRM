@@ -8,7 +8,7 @@ function TotalAdmin() {
     (state: RootState) => state.createCourseModalReducer.base,
   );
   const AllStudents = useSelector(
-    (state: RootState) => state.createStudentReducer.students,
+    (state: RootState) => state.studentReducer.students,
   );
   const { t, i18n } = useTranslation("total");
   return (

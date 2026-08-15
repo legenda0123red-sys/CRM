@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
-import type { RootState } from "../../app/store";
+
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import type { RootState } from "../../../app/store";
 
 
 function StudentsCard() {
   const {t, i18n} = useTranslation('course')
-    const students = useSelector((state: RootState) => state.createStudentReducer.students);
+    const students = useSelector((state: RootState) => state.studentReducer.students);
 
     const searchStudents = useSelector((state: RootState) => state.searchStudentsReducer.search);
 
@@ -20,7 +21,7 @@ function StudentsCard() {
 
     if (findStudents.length === 0) {
       return(
-        <div
+        <div 
         key={i18n.language}
         className="ml-128">
         <p className="language-fade text-gray-500 font-bold">{t('NotFoundStudents')}</p>

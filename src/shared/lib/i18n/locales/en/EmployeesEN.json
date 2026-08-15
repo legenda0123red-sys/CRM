@@ -9,5 +9,16 @@
     "EmployeeRole": "Role",
     "EmployeeStudents": "Students",
     "EmployeeStatus": "Status",
-    "Send again": "Send again"
+    "Send again": "Send again",
+    "NewEmployee": "New Employee",
+    "InfoEmployee": "Name and username",
+    "Email": "Email",
+    "Manager": "Manager",
+    "Teacher": "Teacher",
+    "Curator": "Curator",
+    "Administrator": "administrator",
+    "EmailMessage": "An invitation with a link will be sent to the specified email address. The employee will confirm their email address and create a password—the role will already be assigned.",
+    "Cancel": "Cancel",
+    "SendGmail": "Send invitation",
+    "SelectRole": "Select role"
 }

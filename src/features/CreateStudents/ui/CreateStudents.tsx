@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addStudent, closeWindow, type IStudent } from "../model/createStudent";
+import {  closeWindow } from "../model/createStudent";
 import { useState } from "react";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { useTranslation } from "react-i18next";
+import { addStudent, type IStudent } from "../../../entities/student/model/studentSlice";
 function CreateStudents() {
   const {t, i18n} = useTranslation('course');
   const dispatch = useDispatch<AppDispatch>();

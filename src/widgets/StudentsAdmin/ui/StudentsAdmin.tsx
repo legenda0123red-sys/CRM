@@ -16,7 +16,7 @@ function StudentsAdmin() {
           </header>
 
           <main className="content flex-1 bg-white py-6 px-8 overflow-x-auto">
-            <TotalAdmin />
+            <TotalAdmin /> 
             <StudentsAll />
           </main>
         </div>
