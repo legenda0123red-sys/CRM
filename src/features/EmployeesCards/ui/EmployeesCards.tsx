@@ -1,214 +1,233 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import type { RootState, AppDispatch } from "../../../app/store";
 import type { Status } from "../model/statusSlice";
 import { changeStatus } from "../model/statusSlice";
-import { useTranslation } from "react-i18next";
+import { changeRole, type ICreateEmployees } from "../../CreateEmployees/model/createEmployees";
+
 
 const statuses: Status[] = ["Active", "On leave", "Sick", "Inactive"];
+
+const roles: ICreateEmployees["role"][] = [
+  "Менеджер",
+  "Преподаватель",
+  "Куратор",
+  "Администратор",
+];
+
+const roleTranslationKeys: Record<ICreateEmployees["role"], string> = {
+  "": "",
+  "Менеджер": "Manager",
+  "Преподаватель": "Teacher",
+  "Куратор": "Curator",
+  "Администратор": "Administrator",
+};
 
 const getStatusStyles = (status: Status) => {
   switch (status) {
     case "Active":
       return {
-        wrapper: "bg-green-100 text-green-800",
+        wrapper: "bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20",
         icon: "ti-circle-check",
       };
-
     case "On leave":
       return {
-        wrapper: "bg-amber-100 text-amber-800",
+        wrapper: "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20",
         icon: "ti-beach",
       };
-
     case "Sick":
       return {
-        wrapper: "bg-red-100 text-red-800",
+        wrapper: "bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20",
         icon: "ti-medical-cross",
       };
-
     case "Inactive":
       return {
-        wrapper: "bg-gray-100 text-gray-500",
+        wrapper: "bg-gray-100 text-gray-500 ring-1 ring-inset ring-gray-400/20",
         icon: "ti-user-off",
       };
   }
 };
 
+const getInitials = (fullName: string) =>
+  fullName
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+
 const EmployeesCards = () => {
   const { t, i18n } = useTranslation("employees");
   const dispatch = useDispatch<AppDispatch>();
 
-  // Получаем сотрудников из Redux
   const employeeList = useSelector(
-    (state: RootState) => state.statusReducer.employees,
+    (state: RootState) => state.createEmployeesReducer.list,
+  );
+
+  const statusById = useSelector(
+    (state: RootState) => state.statusReducer.byEmployeeId,
   );
 
   const [openStatusId, setOpenStatusId] = useState<number | null>(null);
+  const [openRoleId, setOpenRoleId] = useState<number | null>(null);
 
   const handleChangeStatus = (employeeId: number, newStatus: Status) => {
-    dispatch(
-      changeStatus({
-        employeeId,
-        status: newStatus,
-      }),
-    );
-
+    dispatch(changeStatus({ employeeId, status: newStatus }));
     setOpenStatusId(null);
   };
 
+  const handleChangeRole = (
+    employeeId: number,
+    newRole: ICreateEmployees["role"],
+  ) => {
+    dispatch(changeRole({ employeeId, role: newRole }));
+    setOpenRoleId(null);
+  };
+
   return (
-    <div
-    key={i18n.language}
-    className="cursor-pointer bg-white rounded-xl border border-gray-300 overflow-visible">
-      <table className="w-full text-sm table-fixed border-collapse">
-        <colgroup>
-          <col className="w-[30%]" />
-          <col className="w-[18%]" />
-          <col className="w-[14%]" />
-          <col className="w-[24%]" />
-          <col className="w-[14%]" />
-        </colgroup>
+    <div key={i18n.language} className="flex flex-col gap-3">
+      {employeeList.slice(0, 10).map((employee) => {
+        if (!employee.id) return null;
 
-        <thead>
-          <tr className="border-b border-gray-300">
-            <th className="text-left font-medium text-gray-500 px-3 py-2.5">
-              {t('Employee')}
-            </th>
+        const status = statusById[employee.id] ?? "Inactive";
+        const statusStyles = getStatusStyles(status);
 
-            <th className="text-left font-medium text-gray-500 px-3 py-2.5">
-              {t('EmployeeRole')}
-            </th>
+        return (
+          <div
+            key={employee.id}
+            className="group flex items-center justify-between gap-4 bg-white rounded-2xl border border-gray-200 p-3.5 shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200"
+          >
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium shrink-0 bg-blue-100 text-blue-800">
+                {getInitials(employee.fullName) || (
+                  <i className="ti ti-user text-base"></i>
+                )}
+              </div>
 
-            <th className="text-left font-medium text-gray-500 px-3 py-2.5">
-              {t('EmployeeStudents')}
-            </th>
+              <div className="min-w-0">
+                <p className="font-medium leading-tight truncate">
+                  {employee.fullName}
+                </p>
+                <p className="text-xs text-gray-400 mt-0.5 truncate">
+                  {employee.email}
+                </p>
+              </div>
+            </div>
 
-            <th className="text-left font-medium text-gray-500 px-3 py-2.5">
-              {t('EmployeeStatus')}
-            </th>
+            <div className="hidden sm:block w-40 shrink-0 text-sm">
+              <p className="text-xs text-gray-400 mb-0.5">
+                {t("EmployeeRole")}
+              </p>
 
-            <th></th>
-          </tr>
-        </thead>
+              <div className="relative inline-block">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenRoleId(
+                      openRoleId === employee.id ? null : employee.id!,
+                    )
+                  }
+                  className="inline-flex items-center gap-1 text-left hover:text-gray-600"
+                >
+                  <span className="truncate">
+                    {employee.role
+                      ? t(roleTranslationKeys[employee.role])
+                      : "—"}
+                  </span>
+                  <i
+                    className={`ti ${
+                      openRoleId === employee.id
+                        ? "ti-chevron-up"
+                        : "ti-chevron-down"
+                    } text-xs shrink-0`}
+                  ></i>
+                </button>
 
-        <tbody>
-          {employeeList.slice(0, 10).map((employee) => {
-            const statusStyles = getStatusStyles(employee.status);
+                {openRoleId === employee.id && (
+                  <div className="absolute left-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-1">
+                    {roles.map((role) => (
+                      <button
+                        key={role}
+                        type="button"
+                        onClick={() => handleChangeRole(employee.id!, role)}
+                        className={`cursor-pointer w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm text-left hover:bg-gray-50 ${
+                          employee.role === role
+                            ? "bg-gray-50 font-medium"
+                            : ""
+                        }`}
+                      >
+                        {t(roleTranslationKeys[role])}
 
-            return (
-              <tr
-                key={employee.id}
-                className="border-b border-gray-300 last:border-b-0"
-              >
-                <td className="px-3 py-2.5">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className={`w-6.5 h-6.5 rounded-full flex items-center justify-center text-[11px] font-medium shrink-0 ${employee.avatarClass}`}
-                    >
-                      {employee.initials ? (
-                        employee.initials
-                      ) : (
-                        <i className="ti ti-user text-sm"></i>
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="leading-none">{employee.name}</p>
-
-                      {employee.email && (
-                        <p className="text-xs text-gray-400 mt-0.5">
-                          {employee.email}
-                        </p>
-                      )}
-                    </div>
+                        {employee.role === role && (
+                          <i className="ti ti-check ml-auto text-green-600"></i>
+                        )}
+                      </button>
+                    ))}
                   </div>
-                </td>
+                )}
+              </div>
+            </div>
 
-                <td className="px-3 py-2.5">{employee.role}</td>
+            <div className="w-36 shrink-0 text-sm">
+              <p className="text-xs text-gray-400 mb-0.5">
+                {t("EmployeeStatus")}
+              </p>
 
-                <td className="px-3 py-2.5">
-                  {employee.students === null ? (
-                    <span className="text-gray-400">—</span>
-                  ) : (
-                    employee.students
-                  )}
-                </td>
+              <div className="relative inline-block">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenStatusId(
+                      openStatusId === employee.id ? null : employee.id!,
+                    )
+                  }
+                  className={`inline-flex items-center gap-1.5 rounded-full text-xs pl-2.5 pr-2 py-1 ${statusStyles.wrapper}`}
+                >
+                  <i className={`ti ${statusStyles.icon} text-sm`}></i>
+                  {status}
+                  <i
+                    className={`ti ${
+                      openStatusId === employee.id
+                        ? "ti-chevron-up"
+                        : "ti-chevron-down"
+                    } text-xs`}
+                  ></i>
+                </button>
 
-                <td className="px-3 py-2.5">
-                  <div className="relative inline-block">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setOpenStatusId(
-                          openStatusId === employee.id ? null : employee.id,
-                        )
-                      }
-                      className={`inline-flex items-center gap-1.5 rounded-full text-xs pl-2 pr-2.5 py-1 ${statusStyles.wrapper}`}
-                    >
-                      <i className={`ti ${statusStyles.icon} text-sm`}></i>
-
-                      {employee.status}
-
-                      <i
-                        className={`ti ${
-                          openStatusId === employee.id
-                            ? "ti-chevron-up"
-                            : "ti-chevron-down"
-                        } text-xs`}
-                      ></i>
-                    </button>
-
-                    {openStatusId === employee.id && (
-                      <div className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-1">
-                        {statuses.map((status) => {
-                          const styles = getStatusStyles(status);
-
-                          return (
-                            <button
-                              key={status}
-                              type="button"
-                              onClick={() =>
-                                handleChangeStatus(employee.id, status)
-                              }
-                              className={`cursor-pointer w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm text-left hover:bg-gray-50 ${
-                                employee.status === status
-                                  ? "bg-gray-50 font-medium"
-                                  : ""
-                              }`}
-                            >
-                              <i
-                                className={`ti ${styles.icon} ${styles.wrapper} rounded-full p-1`}
-                              ></i>
-
-                              {status}
-
-                              {employee.status === status && (
-                                <i className="ti ti-check ml-auto text-green-600"></i>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
+                {openStatusId === employee.id && (
+                  <div className="absolute left-0 top-full mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-1">
+                    {statuses.map((s) => {
+                      const styles = getStatusStyles(s);
+                      return (
+                        <button
+                          key={s}
+                          type="button"
+                          onClick={() => handleChangeStatus(employee.id!, s)}
+                          className={`cursor-pointer w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm text-left hover:bg-gray-50 ${
+                            status === s ? "bg-gray-50 font-medium" : ""
+                          }`}
+                        >
+                          <i
+                            className={`ti ${styles.icon} ${styles.wrapper} rounded-full p-1`}
+                          ></i>
+                          {s}
+                          {status === s && (
+                            <i className="ti ti-check ml-auto text-green-600"></i>
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
-                </td>
+                )}
+              </div>
+            </div>
 
-                <td className="px-3 py-2.5 text-right">
-                  {employee.id === 4 ? (
-                    <button className="text-xs text-gray-500 hover:text-gray-800 underline underline-offset-2">
-                      {t('Send again')}
-                    </button>
-                  ) : (
-                    <i className="ti ti-chevron-right text-gray-400"></i>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            <i className="ti ti-chevron-right text-gray-300 group-hover:text-gray-500 transition-colors shrink-0"></i>
+          </div>
+        );
+      })}
     </div>
   );
 };

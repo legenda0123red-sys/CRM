@@ -16,7 +16,7 @@
     "Manager": "Manager",
     "Teacher": "Teacher",
     "Curator": "Curator",
-    "Administrator": "administrator",
+    "Administrator": "Administrator",
     "EmailMessage": "An invitation with a link will be sent to the specified email address. The employee will confirm their email address and create a password—the role will already be assigned.",
     "Cancel": "Cancel",
     "SendGmail": "Send invitation",

@@ -15,7 +15,7 @@ function CreateStudents() {
     username: "",
     phone: "",
     parentsPhone: "",
-    courses: [],
+    courses: [], 
   });
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

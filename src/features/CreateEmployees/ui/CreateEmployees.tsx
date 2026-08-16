@@ -1,14 +1,52 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
-import { closeEmployeesW } from "../model/createEmployees";
+import {
+  addEmployee,
+  closeEmployeesW,
+  type ICreateEmployees,
+  type IMessage,
+} from "../model/createEmployees";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+
 
 function CreateEmployees() {
   const { t } = useTranslation("employees");
   const dispatch = useDispatch<AppDispatch>();
+  const [employee, setEmployee] = useState<ICreateEmployees>({
+    fullName: "",
+    email: "",
+    role: "",
+  });
   const isOpen = useSelector(
     (state: RootState) => state.createEmployeesReducer.open,
   );
+  const [message, setMessage] = useState<IMessage>({
+    text: "",
+    color: "",
+  });
+
+  function showMessage(text: string, color: string) {
+    setMessage({ text: text, color: color });
+    setTimeout(() => {
+      setMessage({ text: "", color: "" });
+    }, 2000);
+  }
+
+  function SendDataEmployee() {
+    if (!employee.fullName || !employee.email || !employee.role) {
+      showMessage("inputs are empty", "red");
+      return;
+    }
+
+    if (!employee.email.includes("@")) {
+      showMessage("You forgot write the @", "red");
+      return;
+    }
+
+    dispatch(addEmployee({ ...employee, id: Date.now() }));
+    showMessage("Succesful!", "green");
+  }
 
   if (!isOpen) return null;
   return (
@@ -29,7 +67,12 @@ function CreateEmployees() {
             {t("InfoEmployee")}
           </label>
           <input
+            value={employee.fullName}
+            onChange={(e) =>
+              setEmployee({ ...employee, fullName: e.target.value })
+            }
             type="text"
+            required
             placeholder="Например, Иван Петров"
             className="cursor-pointer w-full h-9 px-3 mb-3 rounded-lg border border-gray-300 text-sm"
           />
@@ -38,7 +81,12 @@ function CreateEmployees() {
             {t("Email")}
           </label>
           <input
+            value={employee.email}
+            onChange={(e) =>
+              setEmployee({ ...employee, email: e.target.value })
+            }
             type="email"
+            required
             placeholder="name@company.com"
             className="cursor-pointer w-full h-9 px-3 mb-3 rounded-lg border border-gray-300 text-sm"
           />
@@ -48,16 +96,31 @@ function CreateEmployees() {
           </label>
           <div className="relative mb-3">
             <select
+              onChange={(e) =>
+                setEmployee({
+                  ...employee,
+                  role: e.target.value as ICreateEmployees["role"],
+                })
+              }
+              required
               defaultValue=""
               className=" w-full h-9 px-3 pr-8 rounded-lg border border-gray-300 text-sm appearance-none bg-white cursor-pointer transition focus:outline-none focus:ring-2 focus:ring-gray-800/10 focus:border-gray-400 hover:border-gray-400"
             >
               <option className="font-semibold text-gray-600" value="" disabled>
                 {t("SelectRole")}
               </option>
-              <option className="font-semibold text-gray-600">{t("Manager")} </option>
-              <option className="font-semibold text-gray-600">{t("Teacher")}</option>
-              <option className="font-semibold text-gray-600">{t("Curator")}</option>
-              <option className="font-semibold text-gray-600">{t("Administrator")}</option>
+              <option className="font-semibold text-gray-600" value="Менеджер продаж">
+                {t("Manager")}{" "}
+              </option>
+              <option className="font-semibold text-gray-600" value="Преподаватель">
+                {t("Teacher")}
+              </option>
+              <option className="font-semibold text-gray-600" value="Куратор">
+                {t("Curator")}
+              </option>
+              <option className="font-semibold text-gray-600" value="Администратор">
+                {t("Administrator")}
+              </option>
             </select>
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none cursor-pointer">
               ▼
@@ -77,10 +140,19 @@ function CreateEmployees() {
             >
               {t("Cancel")}
             </button>
-            <button className="flex-1 h-9 rounded-lg bg-gray-900 text-white text-sm flex items-center justify-center gap-1.5 hover:bg-gray-800 cursor-pointer">
+            <button
+              onClick={SendDataEmployee}
+              className="flex-1 h-9 rounded-lg bg-gray-900 text-white text-sm flex items-center justify-center gap-1.5 hover:bg-gray-800 cursor-pointer"
+            >
               <p className="ti ti-send text-sm">{t("SendGmail")}</p>
             </button>
           </div>
+          <p
+            className="text-center mt-4 font-semibold "
+            style={{ color: message.color }}
+          >
+            {message.text}
+          </p>
         </div>
       </div>
     </>
