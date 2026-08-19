@@ -1,0 +1,10 @@
+{
+  "title": "Password Recovery",
+  "subtitle": "Let's get you back into your account",
+  "formTitle": "Forgot your password?",
+  "formSubtitle": "Enter your email and we'll send you a password reset link",
+  "email": "Email",
+  "emailPlaceholder": "Enter your email",
+  "submit": "Send Reset Link",
+  "backToLogin": "Back to login"
+}

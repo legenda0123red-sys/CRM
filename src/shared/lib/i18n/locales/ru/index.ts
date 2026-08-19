@@ -5,7 +5,7 @@ import AuthRU from "./AuthTranslationRU.json";
 import CourseRU from "./CourseRU.json";
 import ErrorsRu from "./ErrorsRU.json";
 import EmployeesRU from "./EmployeesRU.json";
-
+import ForgotRu from "./ForgotRU.json";
 export {
   DashTranslationRu,
   TotalTableRu,
@@ -13,5 +13,6 @@ export {
   AuthRU,
   CourseRU,
   ErrorsRu,
-  EmployeesRU
+  EmployeesRU,
+  ForgotRu
 };

@@ -13,7 +13,8 @@ i18n
             auth: en.AuthEN,
             course: en.CourseEN,
             errors: en.ErrorsEN,
-            employees: en.EmployeesEN
+            employees: en.EmployeesEN,
+            forgot: en.ForgotEN
         },
         ru: {
             dashboard: ru.DashTranslationRu,
@@ -22,7 +23,8 @@ i18n
             auth: ru.AuthRU,
             course: ru.CourseRU,
             errors: ru.ErrorsRu,
-            employees: ru.EmployeesRU
+            employees: ru.EmployeesRU,
+            forgot: ru.ForgotRu
         },
     },
     lng: "en",

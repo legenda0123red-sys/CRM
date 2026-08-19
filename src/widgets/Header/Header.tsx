@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Theme } from "../../features/Theme";
 function Header() {
   const { t, i18n } = useTranslation("course");
   const changeLng = (lng: string) => {
@@ -7,7 +8,9 @@ function Header() {
   };
   return (
     <>
-      <div className="flex items-center justify-end gap-5 w-full">
+      <div
+       key={i18n.language}
+      className="language-fade flex items-center justify-end gap-5 w-full">
         <div className="header__admin flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-purple-100 ring-2 ring-purple-200">
           <img
             src="https://i.pravatar.cc/150?img=12"
@@ -55,7 +58,6 @@ function Header() {
           </div>
         </div>
         <div 
-        key={i18n.language}
         className="language-fade flex gap-6"
         >
           <Link
@@ -71,6 +73,7 @@ function Header() {
             {t("Login")}
           </Link>
         </div>
+        <Theme />
       </div>
     </>
   );

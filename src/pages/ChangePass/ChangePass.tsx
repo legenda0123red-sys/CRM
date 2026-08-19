@@ -1,15 +1,20 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+export default function ForgotPassword() {
+  const { t, i18n } = useTranslation("forgot");
+  const [email, setEmail] = useState("");
 
-  const { i18n, t } = useTranslation("auth");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const changeLng = (lng: "ru" | "en") => {
-    i18n.changeLanguage(lng);
+    console.log("Email:", email);
   };
+
+  function changeLng(lng: string) {
+    i18n.changeLanguage(lng);
+  }
 
   return (
     <div
@@ -19,20 +24,12 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 shadow-xl backdrop-blur-md">
-            <span className="text-3xl">🎓</span>
+            <span className="text-3xl">🔐</span>
           </div>
 
-          <div className="flex items-center justify-center gap-3">
-            <div className="greet">
-              <h1 className="text-3xl font-bold text-white">
-                {t("common.brand")}
-              </h1>
+          <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
 
-              <p className="mt-2 text-sm text-purple-200">
-                {t("common.description")}
-              </p>
-            </div>
-          </div>
+          <p className="mt-2 text-sm text-purple-200">{t("subtitle")}</p>
 
           <div className="mt-5 flex justify-center">
             <div className="flex items-center gap-1 rounded-xl bg-purple-100 p-1 shadow-sm">
@@ -78,23 +75,26 @@ const Login = () => {
         <div className="rounded-3xl border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
           <div className="mb-7">
             <h2 className="text-2xl font-bold text-white">
-              {t("login.title")}
+              {t("formTitle")}
             </h2>
 
             <p className="mt-1 text-sm text-purple-200">
-              {t("login.subtitle")}
+              {t("formSubtitle")}
             </p>
           </div>
 
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="mb-2 block text-sm font-medium text-white">
-                {t("login.email")}
+                {t("email")}
               </label>
 
               <input
                 type="email"
-                placeholder={t("login.emailPlaceholder")}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("emailPlaceholder")}
+                required
                 className="
                   w-full rounded-xl
                   border border-white/10
@@ -112,81 +112,11 @@ const Login = () => {
               />
             </div>
 
-            <div>
-              <label className="mb-2 block text-sm font-medium text-white">
-                {t("login.password")}
-              </label>
-
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder={t("login.passwordPlaceholder")}
-                  className="
-                    w-full rounded-xl
-                    border border-white/10
-                    bg-white/10
-                    px-4 py-3 pr-12
-                    text-white
-                    outline-none
-                    placeholder:text-purple-200/50
-                    transition
-                    focus:border-fuchsia-400
-                    focus:bg-white/15
-                    focus:ring-2
-                    focus:ring-fuchsia-400/20
-                  "
-                />
-
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  className="
-                  cursor-pointer
-                    absolute right-3 top-1/2
-                    -translate-y-1/2
-                    text-purple-200
-                    transition
-                    hover:text-white
-                  "
-                >
-                  {showPassword ? "🙈" : "👁️"}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between text-sm">
-              <label className="flex cursor-pointer items-center gap-2 text-purple-100">
-                <input
-                  type="checkbox"
-                  className="
-                    h-4 w-4
-                    rounded
-                    border-white/20
-                    bg-white/10
-                    accent-fuchsia-500
-                  "
-                />
-
-                {t("login.remember")}
-              </label>
-
-              <Link
-                to="/forgot"
-                className="
-                  font-medium
-                  text-fuchsia-300
-                  transition
-                  hover:text-fuchsia-200
-                "
-              >
-                {t("login.forgotPassword")}
-              </Link>
-            </div>
-
             <button
               type="submit"
               className="
                 w-full
+                cursor-pointer
                 rounded-xl
                 bg-linear-to-r
                 from-violet-500
@@ -203,32 +133,30 @@ const Login = () => {
                 active:scale-[0.99]
               "
             >
-              {t("login.submit")}
+              {t("submit")}
             </button>
           </form>
 
-          <p className="mt-7 text-center text-sm text-purple-200">
-            {t("login.noAccount")}{" "}
+          <div className="mt-7 text-center">
             <Link
-              to="/registr"
+              to="/login"
               className="
+                text-sm
                 font-semibold
                 text-fuchsia-300
                 transition
                 hover:text-fuchsia-200
               "
             >
-              {t("login.register")}
+              ← {t("backToLogin")}
             </Link>
-          </p>
+          </div>
         </div>
 
         <p className="mt-6 text-center text-xs text-purple-300">
-          {t("common.copyright")}
+          {t("copyright")}
         </p>
       </div>
     </div>
   );
-};
-
-export default Login;
+}
