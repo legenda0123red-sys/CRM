@@ -18,12 +18,12 @@ function EmployeesBoard() {
   }, [employeeStatic]);
 
   const teachersStatic = useMemo(() => {
-    return employeeStatic.filter((item) => item.role === 'Преподаватель')
+    return employeeStatic.filter((item) => item.role === "Преподаватель");
   }, [employeeStatic]);
 
   const curatorsStatic = useMemo(() => {
-    return employeeStatic.filter((item) => item.role === 'Куратор');
-  }, [employeeStatic])
+    return employeeStatic.filter((item) => item.role === "Куратор");
+  }, [employeeStatic]);
   return (
     <>
       <div
