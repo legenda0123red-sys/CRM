@@ -17,7 +17,7 @@ function Theme() {
       theme === "dark"
     );
   }, [theme]);
-
+  
   return (
     <button
       type="button"

@@ -27,7 +27,9 @@
     "termsLink": "terms of use",
     "submit": "Create account",
     "hasAccount": "Already have an account?",
-    "login": "Sign in"
+    "login": "Sign in",
+    "username": "Username",
+     "usernamePlaceholder": "Your username"
   },
   "common": {
     "brand": "CourseFlow",

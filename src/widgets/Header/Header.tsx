@@ -10,7 +10,7 @@ function Header() {
     <>
       <div
        key={i18n.language}
-      className="language-fade flex items-center justify-end gap-5 w-full">
+      className="language-fade flex items-center justify-end gap-5 w-full ">
         <div className="header__admin flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-purple-100 ring-2 ring-purple-200">
           <img
             src="https://i.pravatar.cc/150?img=12"
@@ -18,8 +18,8 @@ function Header() {
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="cursor-pointer flex items-center gap-3">
-          <div className="flex items-center gap-1 rounded-xl bg-purple-100 p-1 shadow-sm">
+        <div className="cursor-pointer flex items-center gap-3 ">
+          <div className="flex items-center gap-1 rounded-xl bg-purple-100 p-1 shadow-sm dark:bg-blue-900">
             <button
               type="button"
               onClick={() => changeLng("ru")}
@@ -30,8 +30,8 @@ function Header() {
           transition-all duration-200
           ${
             i18n.language === "ru"
-              ? "bg-white text-purple-700 shadow-sm"
-              : "text-purple-400 hover:text-purple-700"
+              ? "bg-white text-purple-700 shadow-sm dark:bg-blue-700 dark:text-white"
+              : "text-purple-400 hover:text-purple-700 dark:bg-blue-900 dark:text-white"
           }
         `}
             >
@@ -48,8 +48,8 @@ function Header() {
           transition-all duration-200
           ${
             i18n.language === "en"
-              ? "bg-white text-purple-700 shadow-sm"
-              : "text-purple-400 hover:text-purple-700"
+              ? "bg-white text-purple-700 shadow-sm dark:bg-blue-700 dark:text-white"
+              : "text-purple-400 hover:text-purple-700 dark:bg-blue-900 dark:text-white"
           }
         `}
             >
@@ -62,15 +62,22 @@ function Header() {
         >
           <Link
             to="/registr"
-            className=" px-5 py-2 rounded-lg bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition"
+            className=" px-5 py-2 rounded-lg bg-cyan-500 text-white font-semibold hover:bg-cyan-600 transition dark:bg-gray-600 hover:dark:bg-gray-500"
           >
             {t("Registr")}
           </Link>
           <Link
             to="/login"
-            className=" px-5 py-2 rounded-lg bg-purple-500 text-white font-semibold hover:bg-purple-600 transition"
+            className=" px-5 py-2 rounded-lg bg-purple-500 text-white font-semibold hover:bg-purple-600 transition dark:bg-gray-600 hover:dark:bg-gray-500"
           >
             {t("Login")}
+          </Link>
+          <Link
+            to="/user"
+            className=" px-5 py-2 rounded-lg bg-purple-500 text-white font-semibold hover:bg-purple-600 transition dark:bg-gray-600 hover:dark:bg-gray-500"
+          >
+            {/* {t("Login")} */}
+            user
           </Link>
         </div>
         <Theme />

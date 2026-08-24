@@ -13,7 +13,7 @@ function SearchStudents() {
       key={i18n.language}
       value={Student}
       onChange={(e) => dispatch(searchStudents(e.target.value))}
-        className="language-fade w-105 p-4 border rounded-lg"
+        className="language-fade dark:text-white w-105 p-4 border rounded-lg"
         type="search"
         placeholder={`${t('search')} ...`}
       />

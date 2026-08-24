@@ -13,7 +13,7 @@ function StudentsAll() {
         <div className="students__menu mb-10 flex justify-between items-center">
           <h2
           key={i18n.language}
-          className="language-fade students__title  text-2xl font-bold">{t('studentsTitle')}</h2>
+          className="language-fade students__title dark:text-white  text-2xl font-bold">{t('studentsTitle')}</h2>
           <SearchStudents />
           <AddStudentBtn />
           <CreateStudents />

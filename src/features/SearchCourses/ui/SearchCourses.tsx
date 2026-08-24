@@ -17,7 +17,7 @@ function SearchCourse() {
     key={i18n.language}
       value={searchCourse}
       onChange={(e) => dispatch(search(e.target.value))}
-      className="language-fade w-110 p-4 border rounded-lg"
+      className="language-fade w-110 p-4 border rounded-lg dark:text-white "
       type="search"
       placeholder={`${t('search')} ...`}
     />

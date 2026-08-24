@@ -10,7 +10,7 @@ function AddCourseBtn() {
       <button
       key={i18n.language}
         onClick={() => dispatch(openModal())}
-        className="language-fade course__btn border p-3 rounded-lg bg-purple-900 text-white text-lg font-semibold cursor-pointer"
+        className="language-fade course__btn dark:bg-cyan-900 dark:hover:bg-cyan-800 border p-3 rounded-lg bg-purple-900 text-white text-lg font-semibold cursor-pointer"
       >
         + {t("addCourseBtn")}
       </button>

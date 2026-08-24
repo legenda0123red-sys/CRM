@@ -1,7 +1,11 @@
 {
   "dashboard": "Dashboard",
   "students": "Students",
-  "chat": "Chat",
+  "user": "User",
   "employees": "Employees",
-  "settings": "Settings"
+  "settings": "Settings",
+  "Hw": "Homework",
+  "attendance": "Attendance",
+  "advance": "Advance",
+  "MyCourses": "My Courses"
 }

@@ -15,8 +15,8 @@ function TotalAdmin() {
     <>
       <section
       key={i18n.language}
-      className="language-fade total-data flex justify-between mb-12.5">
-        <div className="total-data__card total-data__card--students flex flex-col gap-9 bg-indigo-500 w-96 h-55 rounded-lg px-6 py-6">
+      className="language-fade total-data flex justify-between mb-12.5 ">
+        <div className="total-data__card total-data__card--students dark:bg-cyan-800 flex flex-col gap-9 bg-indigo-500 w-96 h-55 rounded-lg px-6 py-6">
           <div className="total-data__icon w-10">
             <img src={Student} alt="" />
           </div>
@@ -28,7 +28,7 @@ function TotalAdmin() {
           </span>
         </div>
 
-        <div className="total-data__card total-data__card--courses flex flex-col gap-9 bg-violet-500 w-96 h-55 rounded-lg px-6 py-6">
+        <div className="total-data__card total-data__card--courses dark:bg-emerald-800 flex flex-col gap-9 bg-violet-500 w-96 h-55 rounded-lg px-6 py-6">
           <div className="total-data__icon w-10">
             <img src={Courses} alt="" />
           </div>
@@ -40,7 +40,7 @@ function TotalAdmin() {
           </span>
         </div>
 
-        <div className="total-data__card total-data__card--revenue flex flex-col gap-9 bg-fuchsia-500 w-96 h-55 rounded-lg px-6 py-6">
+        <div className="total-data__card total-data__card--revenue dark:bg-violet-900 flex flex-col gap-9 bg-fuchsia-500 w-96 h-55 rounded-lg px-6 py-6">
           <div className="total-data__icon w-10">
             <img src={Employees} alt="" />
           </div>
@@ -48,7 +48,7 @@ function TotalAdmin() {
             {t("employees")}
           </h2>
           <span className="total-data__count text-2xl font-semibold text-white">
-            {/* Число сотрудников */} 0
+             0
           </span>
         </div>
       </section>

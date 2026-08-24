@@ -24,7 +24,7 @@ function StudentsCard() {
         <div 
         key={i18n.language}
         className="ml-128">
-        <p className="language-fade text-gray-500 font-bold">{t('NotFoundStudents')}</p>
+        <p className="language-fade text-gray-500 font-bold dark:text-white">{t('NotFoundStudents')}</p>
       </div>
       );
     }
@@ -33,7 +33,7 @@ function StudentsCard() {
      {findStudents && findStudents.slice(0, 10).map((item) => (
          <div
          key={i18n.language}
-         className="language-fade w-70  bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
+         className="language-fade w-70 dark:bg-zinc-700 dark:border-gray-700 dark:hover:shadow-cyan-900  bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
         
         <div className="bg-linear-to-r from-indigo-500 to-purple-600 h-28 relative  rounded-lg">
           <div className="absolute -bottom-10 left-6">
@@ -48,13 +48,13 @@ function StudentsCard() {
         <div className="pt-14 px-6 pb-6">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-xl font-bold text-gray-800">
+              <h2 className="dark:text-white text-xl font-bold text-gray-800">
                 {item.name} {item.username}
               </h2>
             </div>
 
          
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-600">
+            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-600 dark:text-white dark:bg-green-700">
               Active
             </span>
           </div>
@@ -66,33 +66,33 @@ function StudentsCard() {
               </div> 
 
               <div>
-                <p className="text-xs text-gray-400">{t('phone')}</p>
+                <p className="text-xs text-gray-400 dark:text-white">{t('phone')}</p>
 
-                <p className="font-medium text-gray-700">+{item.phone}</p>
+                <p className="font-medium text-gray-700 dark:text-white">+{item.phone}</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center ">
                 👨‍👩‍👦
               </div>
 
               <div>
-                <p className="text-xs text-gray-400">{t('ParentsPhone')}</p>
+                <p className="text-xs text-gray-400 dark:text-white">{t('ParentsPhone')}</p>
 
-                <p className="font-medium text-gray-700">+{item.parentsPhone}</p>
+                <p className="font-medium text-gray-700 dark:text-white">+{item.parentsPhone}</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center ">
                 🎓
               </div>
 
               <div>
-                <p className="text-xs text-gray-400">{t('Course')}</p>
+                <p className="text-xs text-gray-400 dark:text-white">{t('Course')}</p>
 
-                <p className="font-medium text-gray-700">{item.courses}</p>
+                <p className="font-medium text-gray-700 dark:text-white">{item.courses}</p>
               </div>
             </div>
           </div>

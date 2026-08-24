@@ -10,7 +10,7 @@ function CoursesAdmin() {
     <>
       <section className="course">
         <div className="course-menu mb-10 flex justify-between items-center">
-          <h2 className="course__title  text-2xl font-bold ">{t('courseTitle')}</h2>
+          <h2 className="course__title  text-2xl font-bold dark:text-white">{t('courseTitle')}</h2>
           <Search />
           <AddCourseBtn />
           <Create />
