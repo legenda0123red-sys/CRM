@@ -1,7 +1,11 @@
 {
-    "dashboard": "Главная",
-    "students": "Студенты",
-    "chat": "Чат",
-    "employees": "Сотрудники",
-    "settings": "Настройки"
+  "dashboard": "Главная",
+  "students": "Студенты",
+  "user": "Пользователи",
+  "employees": "Сотрудники",
+  "settings": "Настройки",
+  "Hw": "Задания",
+  "attendance": "Посещаемость",
+  "advance": "Прогресс",
+   "MyCourses": "Мои Курсы"
 }

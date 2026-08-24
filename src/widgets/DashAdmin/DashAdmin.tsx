@@ -18,9 +18,9 @@ function DashAdmin() {
       path: "/students",
     },
     {
-      title: t("chat"),
+      title: t("user"),
       icon: Chat,
-      path: "/chat",
+      path: "/users",
     },
     {
       title: t("employees"),
@@ -31,7 +31,7 @@ function DashAdmin() {
 
   const footerMenu = [
     {
-      title: t('settings'),
+      title: t("settings"),
       icon: Settings,
       path: "/settings",
     },
@@ -39,8 +39,9 @@ function DashAdmin() {
 
   return (
     <aside
-    key={i18n.language}
-    className="language-fade sidebar fixed left-0 top-0 h-screen w-70 shrink-0 bg-purple-700 text-white py-6 px-4">
+      key={i18n.language}
+      className="language-fade sidebar fixed left-0 top-0 h-screen w-70 shrink-0 bg-purple-700 text-white py-6 px-4 dark:bg-gray-900"
+    >
       <div className="sidebar__header flex justify-between items-center">
         <i className="sidebar__logo fi fi-sr-graduation-cap text-4xl text-purple-300"></i>
 

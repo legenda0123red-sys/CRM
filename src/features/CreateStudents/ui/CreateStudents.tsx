@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import {  closeWindow } from "../model/createStudent";
+import { closeWindow } from "../model/createStudent";
 import { useState } from "react";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { useTranslation } from "react-i18next";
-import { addStudent, type IStudent } from "../../../entities/student/model/studentSlice";
+import {
+  addStudent,
+  type IStudent,
+} from "../../../entities/student/model/studentSlice";
 function CreateStudents() {
-  const {t, i18n} = useTranslation('course');
+  const { t, i18n } = useTranslation("course");
   const dispatch = useDispatch<AppDispatch>();
   const IsOpen = useSelector(
     (state: RootState) => state.createStudentReducer.Open,
@@ -15,7 +18,7 @@ function CreateStudents() {
     username: "",
     phone: "",
     parentsPhone: "",
-    courses: [], 
+    courses: [],
   });
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,10 +48,13 @@ function CreateStudents() {
   return (
     <>
       <div
-      key={i18n.language}
-      className="language-fade fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-6 w-100">
-          <h3 className="text-xl font-bold mb-4">{t('CreateStudent')}</h3>
+        key={i18n.language}
+        className="language-fade fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      >
+        <div className="bg-white rounded-lg p-6 w-100 dark:bg-slate-900">
+          <h3 className="text-xl font-bold mb-4 dark:text-white">
+            {t("CreateStudent")}
+          </h3>
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
               required
@@ -56,8 +62,8 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, name: e.target.value })
               }
-              placeholder={t('StudentName')}
-              className=" border p-2 rounded"
+              placeholder={t("StudentName")}
+              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
               type="text"
             />
             <input
@@ -66,8 +72,8 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, username: e.target.value })
               }
-              placeholder={t('StudentUsername')}
-              className=" border p-2 rounded"
+              placeholder={t("StudentUsername")}
+              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
               type="text"
             />
 
@@ -77,8 +83,8 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, phone: e.target.value })
               }
-              placeholder={t('StudentNumber')}
-              className=" border p-2 rounded"
+              placeholder={t("StudentNumber")}
+              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
               type="text"
             />
             <input
@@ -87,13 +93,13 @@ function CreateStudents() {
               onChange={(e) =>
                 setUserData({ ...userData, parentsPhone: e.target.value })
               }
-              placeholder={t('StudentParentNumber')}
-              className=" border p-2 rounded"
+              placeholder={t("StudentParentNumber")}
+              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
               type="text"
             />
             <div className="w-full max-w-md">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t('StudentCourse')}
+              <label className="block text-sm font-semibold text-gray-700 mb-2 dark:text-white">
+                {t("StudentCourse")}
               </label>
 
               <div className="relative">
@@ -105,6 +111,11 @@ function CreateStudents() {
                   }
                   className="
         w-full
+         dark:text-white
+        dark:bg-slate-800
+        dark:border-slate-700
+        dark:focus:border-indigo-600
+        dark:focus:ring-indigo-300
         appearance-none
         bg-white
         border
@@ -125,7 +136,7 @@ function CreateStudents() {
         hover:border-indigo-300
       "
                 >
-                  <option>{t('StudentCourse')}</option>
+                  <option>{t("StudentCourse")}</option>
                   <option>React + TypeScript</option>
 
                   <option>Node.js Backend</option>
@@ -157,17 +168,17 @@ function CreateStudents() {
               </div>
             </div>
             <button
-              className="bg-purple-900 text-white p-2 rounded cursor-pointer font-semibold"
+              className="bg-purple-900 text-white p-2 rounded cursor-pointer font-semibold dark:bg-cyan-800 dark:hover:bg-cyan-700"
               type="submit"
             >
-              {t('StudentCreateBtn')}
+              {t("StudentCreateBtn")}
             </button>
           </form>
           <button
             onClick={() => dispatch(closeWindow())}
-            className="mt-3 text-gray-500 cursor-pointer"
+            className="mt-3 text-gray-500 cursor-pointer dark:text-white"
           >
-            {t('StudentCloseBtn')}
+            {t("StudentCloseBtn")}
           </button>
         </div>
       </div>

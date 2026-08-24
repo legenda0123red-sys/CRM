@@ -11,8 +11,8 @@ function EmployeesBtn() {
       <button
         key={i18n.language}
         onClick={() => dispatch(openEmployeesW())}
-        className="language-fade flex items-center gap-2 h-9 p-6 ti ti-plus text-lg rounded-lg border border-b-slate-800 bg-slate-300  hover:bg-slate-400 active:scale-95 transition"
-      >
+        className="language-fade flex items-center dark:bg-cyan-900 dark:hover:bg-cyan-800 dark:text-white  gap-2 h-9 p-6 ti ti-plus text-lg rounded-lg border  bg-slate-300  hover:bg-slate-400 active:scale-95 transition cursor-pointer"
+      > 
         + {t("AddEmployee")}
       </button>
     </>

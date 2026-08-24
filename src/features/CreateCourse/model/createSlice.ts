@@ -1,15 +1,40 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 export interface ICourse {
-  id?: number;
+  id?: string | number
   title: string;
   desc: string;
+
+  
   AllStudents: number;
-  Mentors?: number;
-  timing: string;
-  time: string;
-  startDate: string;
+  maxStudents: number;
+  studentIds: string[];
+
+  
+  Mentors: number;
+
+  
   lessons: string;
-  studentIds: number[];
+  completedLessons: number;
+
+  
+  startDate: string;
+  endDate: string;
+
+
+  days: string[];
+  time: string;
+  timing: string;
+
+
+  level: "beginner" | "middle" | "advanced";
+  format: "online" | "offline" | "hybrid";
+  room: string;
+
+  
+  price: number;
+
+
+  status: "planned" | "active" | "completed";
 }
 
 interface ICourseBasa {

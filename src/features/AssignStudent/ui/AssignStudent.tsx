@@ -3,8 +3,10 @@ import type { AppDispatch, RootState } from "../../../app/store";
 import { closeW } from "../model/AssignStudentSlice";
 import { AssignSearch } from "../../AssignSearch";
 import { AssignStudentCard } from "../../../widgets/AssignStudentCard";
+import { useTranslation } from "react-i18next";
 
 function AssignStudent() {
+  const {t, i18n} = useTranslation('course')
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector(
     (state: RootState) => state.AssignStudentReducer.isOpen,
@@ -13,14 +15,16 @@ function AssignStudent() {
   if (!isOpen) return null;
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div
+       key={i18n.language}
+       className="language-fade fixed inset-0 bg-black/50 flex items-center justify-center z-50">
         <div className="w-125 bg-white rounded-2xl shadow-2xl p-6">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h2 className="text-2xl font-bold">Добавить студентов</h2>
+              <h2 className="text-2xl font-bold">{t('addStudents')}</h2>
 
               <p className="text-sm text-gray-500 mt-1">
-                Выберите студентов для курса
+                {t('SelectStudents')}
               </p>
             </div>
 
@@ -51,7 +55,7 @@ function AssignStudent() {
           hover:bg-gray-100
         "
             >
-              Отмена
+              {t('Cancel')}
             </button>
 
             <button
@@ -65,7 +69,7 @@ function AssignStudent() {
           hover:bg-cyan-700
         "
             >
-              Добавить
+              {t('add')}
             </button>
           </div>
         </div>

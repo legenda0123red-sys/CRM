@@ -28,57 +28,57 @@ function EmployeesBoard() {
     <>
       <div
         key={i18n.language}
-        className="language-fade grid grid-cols-4 gap-4 mb-6"
+        className="language-fade grid grid-cols-4 gap-4 mb-6 mt-3 "
       >
-        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors">
+        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors dark:bg-purple-950 dark:hover:bg-purple-900">
           <div className="w-11 h-11 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
             <img src={Manager} alt="" className="w-5 h-5" />
           </div>
 
           <div>
-            <p className="text-2xl font-semibold leading-none text-gray-900">
+            <p className="dark:text-white text-2xl font-semibold leading-none text-gray-900">
               {managersStatic.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1.5">{t("Managers")}</p>
+            <p className="text-xs text-gray-500 mt-1.5 dark:text-white">{t("Managers")}</p>
           </div>
         </div>
 
-        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors">
+        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors dark:bg-purple-950 dark:hover:bg-purple-900">
           <div className="w-11 h-11 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
             <img src={Manager} alt="" className="w-5 h-5" />
           </div>
 
           <div>
-            <p className="text-2xl font-semibold leading-none text-gray-900">
+            <p className="text-2xl font-semibold leading-none text-gray-900 dark:text-white">
               {administratorsStatic.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1.5">{t("Administrator")}</p>
+            <p className="text-xs text-gray-500 mt-1.5 dark:text-white">{t("Administrator")}</p>
           </div>
         </div>
 
-        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors">
+        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors dark:bg-purple-950 dark:hover:bg-purple-900">
           <div className="w-11 h-11 rounded-full bg-violet-100 flex items-center justify-center shrink-0">
             <img src={Teachers} alt="" className="w-5 h-5" />
           </div>
 
           <div>
-            <p className="text-2xl font-semibold leading-none text-gray-900">
+            <p className="text-2xl font-semibold leading-none text-gray-900 dark:text-white">
               {teachersStatic.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1.5">{t("Teachers")}</p>
+            <p className="text-xs text-gray-500 mt-1.5 dark:text-white">{t("Teachers")}</p>
           </div>
         </div>
 
-        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors">
+        <div className="bg-[#f1efe8] rounded-xl p-5 flex items-center gap-4 hover:bg-[#ece9df] transition-colors dark:bg-purple-950 dark:hover:bg-purple-900">
           <div className="w-11 h-11 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
             <img src={Curator} alt="" className="w-5 h-5" />
           </div>
 
           <div>
-            <p className="text-2xl font-semibold leading-none text-gray-900">
+            <p className="text-2xl font-semibold leading-none text-gray-900 dark:text-white">
               {curatorsStatic.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1.5">{t("Curators")}</p>
+            <p className="text-xs text-gray-500 mt-1.5 dark:text-white">{t("Curators")}</p>
           </div>
         </div>
       </div>

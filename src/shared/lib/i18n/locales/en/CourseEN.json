@@ -18,6 +18,7 @@
   "edit": "Edit",
   "delete": "Delete",
   "addStudents": "Add Students",
+  "SelectStudents": "Select students for the course",
   "back": "Back",
   "dataNotFound": "Data not found. Open the page through the course list.",
   "add": "Add",
@@ -27,11 +28,11 @@
   "Course": "Course",
   "CreateStudent": "Create Student",
   "StudentName": "Student name",
-  "StudentUsername": "Student usernamr",
+  "StudentUsername": "Student username",
   "StudentNumber": "Student number",
   "StudentParentNumber": "Parent number",
   "StudentCourse": "Select course",
-  "StudentCreateBtn": "Create", 
+  "StudentCreateBtn": "Create",
   "StudentCloseBtn": "Close",
   "CourseDesc": "Description",
   "CourseLessons": "Number of lessons",
@@ -39,5 +40,47 @@
   "CreateCourse": "Create course",
   "CourseStudents": "Number of students",
   "Registr": "Registr",
-  "Login": "Login"
+  "Login": "Login",
+  "Cancel": "Cancel",
+  "SearchStudents": "Search Student ...",
+  "fullCourse": "Full course on",
+
+  "selectCourse": "Select a course",
+  "maxStudents": "Maximum number of students",
+  "currentStudents": "Current number of students",
+  "completedLessons": "Completed lessons",
+  "mentors": "Number of mentors",
+  "durationPlaceholder": "For example: 3 months",
+
+  "startDate": "Start date",
+  "endDate": "End date",
+
+  "days": "Class days",
+  "daysPlaceholder": "For example: Mon, Wed, Fri",
+
+  "format": "Learning format",
+  "online": "Online",
+  "offline": "Offline",
+  "hybrid": "Hybrid",
+
+  "level": "Course level",
+  "beginner": "Beginner",
+  "middle": "Intermediate",
+  "advanced": "Advanced",
+
+  "room": "Room / online class link",
+  "price": "Course price",
+
+  "planned": "Planned",
+  "completed": "Completed",
+
+  "courses": {
+    "reactTypescript": "React + TypeScript",
+    "nodeBackend": "Node.js Backend",
+    "nestjsAdvanced": "NestJS Advanced",
+    "python": "Python",
+    "htmlCss": "HTML + CSS",
+    "react": "React",
+    "javascript": "JavaScript"
+  }
 }

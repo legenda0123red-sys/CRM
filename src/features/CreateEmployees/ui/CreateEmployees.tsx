@@ -11,7 +11,7 @@ import { useState } from "react";
 
 
 function CreateEmployees() {
-  const { t } = useTranslation("employees");
+  const {i18n, t } = useTranslation("employees");
   const dispatch = useDispatch<AppDispatch>();
   const [employee, setEmployee] = useState<ICreateEmployees>({
     fullName: "",
@@ -44,26 +44,28 @@ function CreateEmployees() {
       return;
     }
 
-    dispatch(addEmployee({ ...employee, id: Date.now() }));
+    dispatch(addEmployee(employee));
     showMessage("Succesful!", "green");
   }
 
   if (!isOpen) return null;
   return (
     <>
-      <div className="fixed inset-0 bg-black/45 flex items-center justify-center z-50">
-        <div className="bg-white rounded-xl px-6 py-10 w-120  border border-gray-300">
+      <div
+      key={i18n.language}
+      className="language-fade fixed inset-0 bg-black/45 flex items-center justify-center z-50">
+        <div className="bg-white rounded-xl px-6 py-10 w-120  border border-gray-300 dark:bg-gray-800">
           <div className="flex items-center justify-between mb-5">
-            <h3 className="text-xl font-bold">{t("NewEmployee")}</h3>
+            <h3 className="text-xl font-bold dark:text-white">{t("NewEmployee")}</h3>
             <button
               onClick={() => dispatch(closeEmployeesW())}
-              className="cursor-pointer text-lg font-extrabold"
+              className="cursor-pointer text-lg font-extrabold dark:text-white"
             >
               X
             </button>
           </div>
 
-          <label className="text-sm text-gray-500 block mb-1">
+          <label className="text-sm text-gray-500 block mb-1 dark:text-white">
             {t("InfoEmployee")}
           </label>
           <input
@@ -74,10 +76,10 @@ function CreateEmployees() {
             type="text"
             required
             placeholder="Например, Иван Петров"
-            className="cursor-pointer w-full h-9 px-3 mb-3 rounded-lg border border-gray-300 text-sm"
+            className="cursor-pointer w-full h-9 px-3 mb-3 rounded-lg border border-gray-300 text-sm dark:text-slate-400 dark:font-semibold dark:placeholder:text-white"
           />
 
-          <label className="text-sm text-gray-500 block mb-1">
+          <label className="text-sm text-gray-500 block mb-1 dark:text-white">
             {t("Email")}
           </label>
           <input
@@ -88,7 +90,7 @@ function CreateEmployees() {
             type="email"
             required
             placeholder="name@company.com"
-            className="cursor-pointer w-full h-9 px-3 mb-3 rounded-lg border border-gray-300 text-sm"
+            className="cursor-pointer w-full h-9 px-3 mb-3 rounded-lg border border-gray-300 text-sm dark:text-slate-400 dark:font-semibold dark:placeholder:text-white"
           />
 
           <label className="text-sm text-gray-500 block mb-1">
@@ -136,13 +138,13 @@ function CreateEmployees() {
           <div className="flex gap-2">
             <button
               onClick={() => dispatch(closeEmployeesW())}
-              className="flex-1 h-9 rounded-lg border border-gray-300 text-sm hover:bg-gray-50 cursor-pointer"
+              className="flex-1 h-9 rounded-lg border border-gray-300 text-sm hover:bg-gray-50 cursor-pointer dark:bg-cyan-800 dark:hover:bg-cyan-700 dark:text-white"
             >
               {t("Cancel")}
             </button>
             <button
               onClick={SendDataEmployee}
-              className="flex-1 h-9 rounded-lg bg-gray-900 text-white text-sm flex items-center justify-center gap-1.5 hover:bg-gray-800 cursor-pointer"
+              className="flex-1 h-9 rounded-lg bg-gray-900 text-white text-sm flex items-center justify-center gap-1.5 hover:bg-gray-800 cursor-pointer dark:hover:bg-gray-950"
             >
               <p className="ti ti-send text-sm">{t("SendGmail")}</p>
             </button>

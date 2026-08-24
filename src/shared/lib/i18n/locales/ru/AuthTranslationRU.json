@@ -28,7 +28,9 @@
     "termsLink": "условия использования",
     "submit": "Создать аккаунт",
     "hasAccount": "Уже есть аккаунт?",
-    "login": "Войти"
+    "login": "Войти",
+    "username": "Фамилия",
+    "usernamePlaceholder": "Ваше фамилия"
   },
   "common": {
     "brand": "CourseFlow",
