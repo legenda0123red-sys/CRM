@@ -23,8 +23,13 @@ function CourseAdmin() {
 
   if (visibleCourses.length === 0) {
     return (
-      <div key={i18n.language} className="language-fade flex justify-center py-20">
-        <p className="font-bold text-gray-500 dark:text-white">{t("notFound")}</p>
+      <div className="ml-122 flex min-h-[20vh] items-center justify-center">
+        <p
+          key={i18n.language}
+          className="language-fade text-center font-bold text-gray-500 dark:text-white"
+        >
+          {t("notFound")}
+        </p>
       </div>
     );
   }
@@ -32,15 +37,18 @@ function CourseAdmin() {
   const statusMap: Record<string, { label: string; className: string }> = {
     active: {
       label: t("statusActive"),
-      className: "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400",
+      className:
+        "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400",
     },
     planned: {
       label: t("statusPlanned"),
-      className: "bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400",
+      className:
+        "bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400",
     },
     completed: {
       label: t("statusCompleted"),
-      className: "bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400",
+      className:
+        "bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400",
     },
   };
 
@@ -79,7 +87,9 @@ function CourseAdmin() {
                 {item.title.slice(0, 2).toUpperCase()}
               </div>
 
-              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${status.className}`}>
+              <span
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${status.className}`}
+              >
                 {status.label}
               </span>
             </div>
@@ -132,7 +142,9 @@ function CourseAdmin() {
               <div className="mt-4 space-y-2 text-sm">
                 <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <span>📅</span>
-                  <span className="text-slate-400 dark:text-slate-500">{t("schedule")}</span>
+                  <span className="text-slate-400 dark:text-slate-500">
+                    {t("schedule")}
+                  </span>
                   <span className="ml-auto font-semibold text-slate-800 dark:text-white">
                     {item.startDate} — {item.endDate}
                   </span>
@@ -140,7 +152,9 @@ function CourseAdmin() {
 
                 <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <span>🕒</span>
-                  <span className="text-slate-400 dark:text-slate-500">{t("time")}</span>
+                  <span className="text-slate-400 dark:text-slate-500">
+                    {t("time")}
+                  </span>
                   <span className="ml-auto font-semibold text-slate-800 dark:text-white">
                     {item.time}
                   </span>
@@ -148,7 +162,9 @@ function CourseAdmin() {
 
                 <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                   <span>📆</span>
-                  <span className="text-slate-400 dark:text-slate-500">{t("days")}</span>
+                  <span className="text-slate-400 dark:text-slate-500">
+                    {t("days")}
+                  </span>
                   <span className="ml-auto font-semibold text-slate-800 dark:text-white">
                     {item.days.join(" • ")}
                   </span>
@@ -183,7 +199,11 @@ function CourseAdmin() {
                 💰 {item.price.toLocaleString("ru-RU")} {t("currency")}
               </div>
 
-              <Link to={`/dashboard/course/${item.id}`} state={item} className="mt-4">
+              <Link
+                to={`/dashboard/course/${item.id}`}
+                state={item}
+                className="mt-4"
+              >
                 <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition hover:-translate-y-0.5 hover:bg-indigo-700 dark:bg-indigo-950 dark:shadow-none dark:hover:bg-indigo-900">
                   {t("details")}
                   <span>→</span>

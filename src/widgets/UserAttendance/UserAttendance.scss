@@ -1,0 +1,247 @@
+.attendance {
+  padding: 24px;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    p {
+      margin-top: 6px;
+      color: #6b7280;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__stat {
+    min-width: 90px;
+    padding: 14px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #fff;
+
+    span {
+      display: block;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 22px;
+      color: #111827;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  &__card {
+    position: relative;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+    background: #fff;
+    transition: 0.2s;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  &__card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__course {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__status {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+
+    &--present {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    &--absent {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+  }
+
+  &__info {
+    display: flex;
+    gap: 60px;
+    margin-top: 24px;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  &__info strong {
+    font-size: 14px;
+    color: #374151;
+  }
+
+  &__icon {
+    position: absolute;
+    right: 22px;
+    bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #059669;
+
+    font-size: 18px;
+    font-weight: 800;
+  }
+}
+
+/* Dark theme */
+
+.dark {
+  .attendance {
+    &__header {
+      h1 {
+        color: #f8fafc;
+      }
+
+      p {
+        color: #94a3b8;
+      }
+    }
+
+    &__stat {
+      border-color: #27272a;
+      background: #18181b;
+
+      span {
+        color: #71717a;
+      }
+
+      strong {
+        color: #f8fafc;
+      }
+    }
+
+    &__card {
+      border-color: #27272a;
+      background: #18181b;
+
+      &:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    &__course {
+      background: rgba(99, 102, 241, 0.12);
+      color: #818cf8;
+    }
+
+    &__status {
+      &--present {
+        background: rgba(16, 185, 129, 0.12);
+        color: #34d399;
+      }
+
+      &--absent {
+        background: rgba(239, 68, 68, 0.12);
+        color: #f87171;
+      }
+    }
+
+    &__label {
+      color: #71717a;
+    }
+
+    &__info strong {
+      color: #e5e7eb;
+    }
+
+    &__icon {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+    }
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .attendance {
+    &__header {
+      flex-direction: column;
+    }
+
+    &__stats {
+      width: 100%;
+    }
+
+    &__stat {
+      flex: 1;
+      min-width: 0;
+    }
+
+    &__list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .attendance {
+    padding: 16px;
+
+    &__stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__info {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+}
