@@ -154,34 +154,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-sm">
-              <label className="flex cursor-pointer items-center gap-2 text-purple-100">
-                <input
-                  type="checkbox"
-                  className="
-                    h-4 w-4
-                    rounded
-                    border-white/20
-                    bg-white/10
-                    accent-fuchsia-500
-                  "
-                />
-
-                {t("login.remember")}
-              </label>
-
-              <Link
-                to="/forgot"
-                className="
-                  font-medium
-                  text-fuchsia-300
-                  transition
-                  hover:text-fuchsia-200
-                "
-              >
-                {t("login.forgotPassword")}
-              </Link>
-            </div>
+           
 
             <button
               type="submit"
