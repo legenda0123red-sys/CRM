@@ -33,7 +33,7 @@ function CreateStudents() {
       return;
     }
 
-    dispatch(addStudent({ ...userData, id: Date.now() }));
+    dispatch(addStudent(userData));
     dispatch(closeWindow());
     setUserData({
       name: "",

@@ -10,7 +10,7 @@ function UserCourse() {
 
   if (courses.length === 0) {
     return (
-      <div className="course-card__empty">
+      <div className="text-center mt-12.5 text-gray-700 text-lg font-semibold dark:text-white">
         <h2>Курсов пока нет</h2>
         <p>Здесь будут отображаться ваши курсы</p>
       </div>

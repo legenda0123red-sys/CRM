@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../auth/api/register";
 
 export interface RegistrData {
@@ -15,6 +15,7 @@ export interface IMessage {
   color: string;
 }
 const RegistrationForm = () => {
+  const navigation = useNavigate();
   const [message, setMessage] = useState<IMessage>({
     text: "",
     color: "",
@@ -67,6 +68,9 @@ const RegistrationForm = () => {
     registerUser(newUser);
     setUser({ firstName: '', lastName: "", email: "", password: "", confirmPassword: "" });
     showMessage('Succesfull!', 'green');
+    setTimeout(() => {
+      navigation('/teacher');
+    }, 5000)
   };
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
