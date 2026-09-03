@@ -38,6 +38,7 @@ function HeaderUser() {
       <div className="header__theme">
         <Theme />
         <Link to='/dashboard'>Admin</Link>
+        <Link to='/teacher'>Teacher</Link>
       </div>
     </div>
   );

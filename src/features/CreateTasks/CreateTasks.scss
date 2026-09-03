@@ -1,0 +1,105 @@
+.create{
+    position: fixed;
+    inset: 0;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(2, 6, 23, 0.6);
+    padding: 16px;
+
+    .modal{
+        width: 650px;
+        height: 690px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 29px;
+    }
+
+    &-header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    &-header__title{
+        font-size: 20px;
+        font-weight: 700;
+    }
+    &-header__button{
+        font-size: 22px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    &-form{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    &-form__div{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+    }
+    &-form__title{
+        font-size: 20px;
+        font-weight: 700;
+    }
+    &-form__input{
+        width: 500px;
+        border: 2px solid black;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+    &-form__div textarea{
+        width: 500px;
+        height: 100px;
+        resize: none;
+    }
+    &-form__btns{
+        display: flex;
+        justify-content: space-between;
+    }
+    &-btns__task{
+        width: 420px;
+        border: 2px solid white;
+        background-color: cornflowerblue;
+        border-radius: 8px;
+        font-weight: 600;
+        margin-right: 40px;
+        padding: 12px;
+        color: white;
+        cursor: pointer;
+    }
+    &-btns__cancel{
+        width: 125px;
+        border: 2px solid black;
+        padding: 12px;
+        border-radius: 8px;
+        background-color: lightgray;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+    }
+    .score{
+        width: 220px;
+    }
+
+    .deadline{
+        width: 220px;
+    }
+
+    // input[type="number"]{
+    //     -moz-appearance: textfield;
+    // }
+
+    // input[type="number"]::-webkit-inner-spin-button
+    // input[type="number"]::-webkit-outer-spin-button {
+    //     -webkit-appearance: none;
+    //     margin: 0;
+    // }
+}

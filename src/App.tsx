@@ -12,6 +12,13 @@ import { UserHw } from "./widgets/UserHw";
 import { UserMyCourses } from "./widgets/UserMyCourses";
 import { UserAttendance } from "./widgets/UserAttendance";
 import { UserAdvance } from "./widgets/UserAdvance";
+import { DashLayoutTeacher } from "./widgets/DashLayoutTeacher";
+import { TeacherCourses } from "./widgets/TeacherCourses";
+import { TeacherHw } from "./widgets/TeacherHw";
+import { CreateTasks } from "./features/CreateTasks";
+import { TeacherAtten } from "./widgets/TeacherAtten";
+import { TeacherAdvance } from "./widgets/TeacherAdvance";
+
 
 function App() {
   return (
@@ -33,7 +40,14 @@ function App() {
         <Route path="attendance" element={<UserAttendance />} />
         <Route path="advance" element={<UserAdvance />} />
       </Route>
+      <Route path="/teacher" element={<DashLayoutTeacher />}>
+        <Route index element={<TeacherCourses />} />
+        <Route path="/teacher/Hw" element={<TeacherHw />} />
+        <Route path="/teacher/attendance" element={<TeacherAtten />} />
+        <Route path="/teacher/advance" element={<TeacherAdvance />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
+      <Route path="/create" element={<CreateTasks />} />
     </Routes>
   );
 }

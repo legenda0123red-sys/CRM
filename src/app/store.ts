@@ -9,6 +9,7 @@ import { statusReducer } from "../features/EmployeesCards";
 import { studentReducer } from "../entities/student";
 import { createEmployeesReducer } from "../features/CreateEmployees";
 import { themeReducer } from "../features/Theme";
+import { createTaskReducer } from "../features/CreateTasks";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     studentReducer,
     createEmployeesReducer,
     themeReducer,
+    createTaskReducer
   },
 });
 
