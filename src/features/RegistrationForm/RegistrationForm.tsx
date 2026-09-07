@@ -65,7 +65,7 @@ const RegistrationForm = () => {
       password: user.password,
     };
 
-    registerUser(newUser);
+   await registerUser(newUser);
     setUser({ firstName: '', lastName: "", email: "", password: "", confirmPassword: "" });
     showMessage('Succesfull!', 'green');
     setTimeout(() => {

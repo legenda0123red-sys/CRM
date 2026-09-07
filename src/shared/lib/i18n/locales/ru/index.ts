@@ -7,7 +7,11 @@ import ErrorsRu from "./ErrorsRU.json";
 import EmployeesRU from "./EmployeesRU.json";
 import ForgotRu from "./ForgotRU.json";
 import TasksRU from './Tasks.json';
+import AttenRu from './AttendanceRU.json';
+import AdvanceRU from './AdvanceRU.json'
 export {
+  AdvanceRU,
+  AttenRu,
   TasksRU,
   DashTranslationRu,
   TotalTableRu,

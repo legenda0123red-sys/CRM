@@ -1,0 +1,18 @@
+{
+  "title": "Attendance",
+  "description": "Mark students' attendance for the lesson",
+  "lesson": "Lesson",
+  "date": "Date",
+  "students": "Students",
+  "studentsCount": "{{count}} students",
+  "totalStudents": "Total students",
+  "present": "Present",
+  "absent": "Absent",
+  "student": "Student",
+  "status": "Status",
+  "presentStatus": "Present",
+  "absentStatus": "Absent",
+  "save": "Save attendance",
+  "success": "Attendance saved successfully",
+  "error": "Error saving attendance"
+}

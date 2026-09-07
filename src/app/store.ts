@@ -10,7 +10,8 @@ import { studentReducer } from "../entities/student";
 import { createEmployeesReducer } from "../features/CreateEmployees";
 import { themeReducer } from "../features/Theme";
 import { createTaskReducer } from "../features/CreateTasks";
-
+import { courseReducer } from "../entities/course/api/courseApi";
+import { CreateAdminReducer } from "../features/CreateAdmin";
 export const store = configureStore({
   reducer: {
     searchReducer,
@@ -23,7 +24,9 @@ export const store = configureStore({
     studentReducer,
     createEmployeesReducer,
     themeReducer,
-    createTaskReducer
+    createTaskReducer,
+    courseReducer,
+    CreateAdminReducer,
   },
 });
 

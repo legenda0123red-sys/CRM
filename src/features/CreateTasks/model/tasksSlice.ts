@@ -3,6 +3,7 @@ import {
   createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
+import { apiFetch } from "../../../shared/api/api";
 
 export interface IHomework {
   title: string;
@@ -28,31 +29,16 @@ const initialState: HwState = {
 };
 
 export const getHw = createAsyncThunk("homework/all", async () => {
-  const response = await fetch("http://localhost:3000/homework/all");
-
-  if (!response.ok) {
-    throw new Error("Не удалось получить задания");
-  }
-
-  return await response.json();
+  return await apiFetch('/homework/all')
 });
 
 export const createHw = createAsyncThunk(
   "homework/create",
   async (hw: IHomework) => {
-    const response = await fetch("http://localhost:3000/homework/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(hw),
-    });
-
-    if (!response.ok) {
-      throw new Error("Не удалось создать задание");
-    }
-
-    return await response.json();
+   return await apiFetch('/homework/create', {
+    method: 'POST',
+    body: JSON.stringify(hw)
+   })
   },
 );
 

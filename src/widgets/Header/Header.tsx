@@ -1,11 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Theme } from "../../features/Theme";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../app/store";
+import { CreateAdmin, openAdmin } from "../../features/CreateAdmin";
 function Header() {
+  const dispatch = useDispatch<AppDispatch>()
   const { t, i18n } = useTranslation("course");
   const changeLng = (lng: string) => {
     i18n.changeLanguage(lng);
   };
+ 
   return (
     <>
       <div
@@ -76,11 +81,15 @@ function Header() {
             to="/user"
             className=" px-5 py-2 rounded-lg bg-purple-500 text-white font-semibold hover:bg-purple-600 transition dark:bg-gray-600 hover:dark:bg-gray-500"
           >
-            {/* {t("Login")} */}
+            
             user
           </Link>
+          <button
+          onClick={() => dispatch(openAdmin())}
+          className="px-5 py-2 rounded-lg bg-cyan-700 text-white font-semibold hover:bg-cyan-800 transition dark:bg-gray-600 hover:dark:bg-gray-50">+ Admin</button>
         </div>
         <Theme />
+        <CreateAdmin />
       </div>
     </>
   );

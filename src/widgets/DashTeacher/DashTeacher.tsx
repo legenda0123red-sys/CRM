@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Dash, Grad, Chat, Settings, Teamwork } from "../../shared/icons/icons";
+import { Settings, HW, Atten, Level, Course } from "../../shared/icons/icons";
 import { Link, useLocation } from "react-router-dom";
 
 function DashTeacher() {
@@ -9,22 +9,22 @@ function DashTeacher() {
   const menu = [
     {
       title: t("MyCourses"),
-      icon: Dash,
+      icon: Course,
       path: "/teacher",
     },
     {
       title: t("Hw"),
-      icon: Grad,
+      icon: HW,
       path: "/teacher/Hw",
     },
     {
       title: t("attendance"),
-      icon: Chat,
+      icon: Atten,
       path: "/teacher/attendance",
     },
     {
       title: t("advance"),
-      icon: Teamwork,
+      icon: Level,
       path: "/teacher/advance",
     },
   ];

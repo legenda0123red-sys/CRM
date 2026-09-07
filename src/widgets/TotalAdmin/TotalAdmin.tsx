@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 function TotalAdmin() {
   const AllCourse = useSelector(
-    (state: RootState) => state.createCourseModalReducer.base,
+    (state: RootState) => state.courseReducer.courses,
   );
   const AllStudents = useSelector(
     (state: RootState) => state.studentReducer.students,

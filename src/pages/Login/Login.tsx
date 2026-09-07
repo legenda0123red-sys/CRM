@@ -1,14 +1,81 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import type { IMessage } from "../../features/RegistrationForm/RegistrationForm";
+import { LoginUser } from "../../features/auth/api/login";
+export interface ILogin {
+  email: string;
+  password: string;
+}
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState<ILogin>({
+    email: "",
+    password: "",
+  });
+  const [message, setMessage] = useState<IMessage>({
+    text: "",
+    color: "",
+  });
+  function showMessage(text: string, color: string) {
+    setMessage({ text, color });
+    setTimeout(() => {
+      setMessage({ text: "", color: "" });
+    }, 3000);
+  }
 
   const { i18n, t } = useTranslation("auth");
 
   const changeLng = (lng: "ru" | "en") => {
     i18n.changeLanguage(lng);
+  };
+
+  const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!user.email || !user.password) {
+      showMessage("Поля пустые", "red");
+      return;
+    }
+
+    if (!user.email.includes("@")) {
+      showMessage("Ошибка, ты забыл написать @", "red");
+      return;
+    }
+
+    if (user.password.length < 8) {
+      showMessage("Ошибка, пароль должен содержать минимум 8 символов", "red");
+      return;
+    }
+
+    const newUser = {
+      email: user.email,
+      password: user.password,
+    };
+
+    try {
+    const result =  await LoginUser(newUser);
+
+      showMessage("Успешно", "green");
+
+      setUser({
+        email: "",
+        password: "",
+      });
+
+      setTimeout(() => {
+        if (result.user.role === "ADMIN") {
+          navigate("/dashboard");
+        } else if (result.user.role === "TEACHER") {
+          navigate("/teacher");
+        }
+      }, 1000);
+    } catch (error) {
+      if (error instanceof Error) {
+        showMessage(error.message, "red");
+      }
+    }
   };
 
   return (
@@ -86,13 +153,16 @@ const Login = () => {
             </p>
           </div>
 
-          <form className="space-y-5">
+          <form onSubmit={handlesubmit} className="space-y-5">
             <div>
               <label className="mb-2 block text-sm font-medium text-white">
                 {t("login.email")}
               </label>
 
               <input
+                required
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 type="email"
                 placeholder={t("login.emailPlaceholder")}
                 className="
@@ -119,6 +189,11 @@ const Login = () => {
 
               <div className="relative">
                 <input
+                  required
+                  value={user.password}
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
                   type={showPassword ? "text" : "password"}
                   placeholder={t("login.passwordPlaceholder")}
                   className="
@@ -154,8 +229,6 @@ const Login = () => {
               </div>
             </div>
 
-           
-
             <button
               type="submit"
               className="
@@ -178,6 +251,12 @@ const Login = () => {
             >
               {t("login.submit")}
             </button>
+
+            <div className="mt-4 text-center">
+              <p className="text-lg font-bold" style={{ color: message.color }}>
+                {message.text}
+              </p>
+            </div>
           </form>
 
           <p className="mt-7 text-center text-sm text-purple-200">

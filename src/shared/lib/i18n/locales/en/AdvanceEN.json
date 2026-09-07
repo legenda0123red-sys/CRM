@@ -1,0 +1,13 @@
+{
+    "title": "Student Progress",
+    "description": "Track students' learning progress in the course",
+    "course": "Course",
+    "students": "Students",
+    "studentsCount": "{{count}} students",
+    "completed": "Completed",
+    "inProgress": "In progress",
+    "completedStatus": "Completed",
+    "averageProgress": "Average progress",
+    "lessonsCompleted": "Lessons completed",
+    "progress": "Progress"
+}

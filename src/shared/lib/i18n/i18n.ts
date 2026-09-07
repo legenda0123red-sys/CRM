@@ -15,7 +15,9 @@ i18n
             errors: en.ErrorsEN,
             employees: en.EmployeesEN,
             forgot: en.ForgotEN,
-            task: en.TasksEN
+            task: en.TasksEN,
+            attendance: en.AttenEN,
+            advance: en.AdvanceEN
         },
         ru: {
             dashboard: ru.DashTranslationRu,
@@ -26,7 +28,9 @@ i18n
             errors: ru.ErrorsRu,
             employees: ru.EmployeesRU,
             forgot: ru.ForgotRu,
-            task: ru.TasksRU
+            task: ru.TasksRU,
+            attendance: ru.AttenRu,
+            advance: ru.AdvanceRU
         },
     },
     lng: "en",

@@ -1,11 +1,12 @@
 import "./UserCourse.scss";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
-import type { ICourse } from "../../features/CreateCourse/model/createSlice";
+import type { ICourse } from "../../entities/course/api/courseApi";
+
 
 function UserCourse() {
   const courses: ICourse[] = useSelector(
-    (state: RootState) => state.createCourseModalReducer.base,
+    (state: RootState) => state.courseReducer.courses,
   );
 
   if (courses.length === 0) {

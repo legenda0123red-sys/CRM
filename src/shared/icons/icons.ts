@@ -6,3 +6,7 @@ export {default as Teamwork} from './teamwork.png'
 export {default as Manager} from './manager.png'
 export {default as Teachers} from './teachers.png'
 export {default as Curator} from './curator.png'
+export {default as HW} from './HW.png'
+export {default as Atten} from './attendance.png';
+export {default as Level} from './level-up.png'
+export {default as Course} from './course.png'

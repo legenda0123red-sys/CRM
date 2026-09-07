@@ -18,6 +18,7 @@ import { TeacherHw } from "./widgets/TeacherHw";
 import { CreateTasks } from "./features/CreateTasks";
 import { TeacherAtten } from "./widgets/TeacherAtten";
 import { TeacherAdvance } from "./widgets/TeacherAdvance";
+import { Setting } from "./widgets/AdminSetting";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
       <Route path="/students" element={<StudentsAdmin />} />
       <Route path="/chat" element={<StudentsAdmin />} />
       <Route path="/course" element={<StudentsAdmin />} />
-      <Route path="/settings" element={<StudentsAdmin />} />
+      <Route path="/settings" element={<Setting />} />
       <Route path="/registr" element={<Registr />} />
       <Route path="/dashboard/course/:id" element={<OneCourse />} />
       <Route path="/login" element={<Login />} />

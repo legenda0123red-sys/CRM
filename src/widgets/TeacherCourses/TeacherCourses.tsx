@@ -3,12 +3,12 @@ import "./TeacherCourses.scss";
 import type { RootState } from "../../app/store";
 
 function TeacherCourses() {
-    const course = useSelector((state: RootState) => state.createCourseModalReducer.base);
+    const course = useSelector((state: RootState) => state.courseReducer.courses);
   return (
     <div className="courses-card">
 
     {course.map((course) => (
-        <div className="course-card">
+        <div className="course-card ">
       <div className="course-card__top">
         <span
           className={`course-card__status course-card__status--${course.status}`}
