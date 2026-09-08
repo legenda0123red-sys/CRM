@@ -12,6 +12,14 @@ import { UserHw } from "./widgets/UserHw";
 import { UserMyCourses } from "./widgets/UserMyCourses";
 import { UserAttendance } from "./widgets/UserAttendance";
 import { UserAdvance } from "./widgets/UserAdvance";
+import { DashLayoutTeacher } from "./widgets/DashLayoutTeacher";
+import { TeacherCourses } from "./widgets/TeacherCourses";
+import { TeacherHw } from "./widgets/TeacherHw";
+import { CreateTasks } from "./features/CreateTasks";
+import { TeacherAtten } from "./widgets/TeacherAtten";
+import { TeacherAdvance } from "./widgets/TeacherAdvance";
+import { Setting } from "./widgets/AdminSetting";
+
 
 function App() {
   return (
@@ -21,7 +29,7 @@ function App() {
       <Route path="/students" element={<StudentsAdmin />} />
       <Route path="/chat" element={<StudentsAdmin />} />
       <Route path="/course" element={<StudentsAdmin />} />
-      <Route path="/settings" element={<StudentsAdmin />} />
+      <Route path="/settings" element={<Setting />} />
       <Route path="/registr" element={<Registr />} />
       <Route path="/dashboard/course/:id" element={<OneCourse />} />
       <Route path="/login" element={<Login />} />
@@ -33,7 +41,14 @@ function App() {
         <Route path="attendance" element={<UserAttendance />} />
         <Route path="advance" element={<UserAdvance />} />
       </Route>
+      <Route path="/teacher" element={<DashLayoutTeacher />}>
+        <Route index element={<TeacherCourses />} />
+        <Route path="/teacher/Hw" element={<TeacherHw />} />
+        <Route path="/teacher/attendance" element={<TeacherAtten />} />
+        <Route path="/teacher/advance" element={<TeacherAdvance />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
+      <Route path="/create" element={<CreateTasks />} />
     </Routes>
   );
 }

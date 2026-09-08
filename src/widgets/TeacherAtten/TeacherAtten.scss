@@ -1,0 +1,282 @@
+
+.attendance {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 100%;
+  padding: 24px 32px;
+  background: #f7f8fa;
+  color: #1f2430;
+
+  
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__title {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    &__desc {
+      margin: 6px 0 0;
+      color: #7b8190;
+      font-size: 15px;
+    }
+  }
+
+
+  &-data {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 220px;
+
+      span {
+        color: #8a909c;
+        font-size: 13px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      input {
+        width: 180px;
+        padding: 9px 12px;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+
+        &:focus {
+          border-color: #9ca3af;
+        }
+      }
+    }
+  }
+
+  
+  &-board {
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+
+    &__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 30px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    &__stat {
+      padding: 20px;
+      border-right: 1px solid #e5e7eb;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      span {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      p {
+        margin: 0;
+        color: #7b8190;
+        font-size: 13px;
+      }
+    }
+  }
+
+  
+  &-many {
+    margin-bottom: 20px;
+
+    &__students {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    &__data {
+      margin: 5px 0 0;
+      color: #7b8190;
+      font-size: 14px;
+    }
+  }
+
+  
+  &-list {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+
+    &__header {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      padding: 14px 20px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e5e7eb;
+
+      p {
+        margin: 0;
+        color: #7b8190;
+        font-size: 13px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  
+  &-student {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &__info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      p {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
+
+    &__avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #eef0f3;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: 165px;
+      padding: 9px 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: 0.2s;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+
+      &--present {
+        background: #e4f7ea;
+        color: #22863a;
+      }
+
+      &--absent {
+        background: #ffe8e8;
+        color: #d33;
+      }
+    }
+  }
+
+  
+  &-save {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+
+    &__btn {
+      padding: 11px 20px;
+      border: none;
+      border-radius: 9px;
+      background: #1f2430;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 700px) {
+  .attendance {
+    padding: 16px;
+
+    &-data {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    &-board__stats {
+      grid-template-columns: 1fr;
+    }
+
+    &-board__stat {
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    &-list__header {
+      grid-template-columns: 1fr 150px;
+    }
+
+    &-student {
+      align-items: flex-start;
+      flex-direction: column;
+
+      &__button {
+        width: 100%;
+      }
+    }
+
+    &-save__btn {
+      width: 100%;
+    }
+  }
+}
+

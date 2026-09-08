@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
-import { closeModal, addCourse, type ICourse } from "../model/createSlice";
+import { closeModal, } from "../model/createSlice";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { createCourse, type ICourse } from "../../../entities/course/api/courseApi";
 
 function CreateCourse() {
   const { t, i18n } = useTranslation("course");
@@ -43,17 +44,11 @@ function CreateCourse() {
     status: "planned",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    console.log(database);
-
-    dispatch(
-      addCourse({
-        ...database,
-        id: Date.now(),
-      }),
-    );
+  try {
+    await dispatch(createCourse(database)).unwrap();
 
     dispatch(closeModal());
 
@@ -86,7 +81,10 @@ function CreateCourse() {
 
       status: "planned",
     });
-  };
+  } catch (error) {
+    console.error("Ошибка создания курса:", error);
+  }
+};
 
   if (!isOpen) return null;
 

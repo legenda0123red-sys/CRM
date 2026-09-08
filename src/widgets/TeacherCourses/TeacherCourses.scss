@@ -1,0 +1,409 @@
+.teacher-courses {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 32px;
+  min-height: 100%;
+
+  background: #f7f8fa;
+  color: #1f2430;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2430;
+  }
+
+  &__subtitle {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+}
+
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 20px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.04),
+    0 2px 6px rgba(16, 24, 40, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    border-color: #d7d9ff;
+
+    box-shadow:
+      0 4px 10px rgba(16, 24, 40, 0.06),
+      0 8px 20px rgba(16, 24, 40, 0.05);
+  }
+
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    &--planned {
+      background: #eef2ff;
+      color: #4f46e5;
+    }
+
+    &--active {
+      background: #ecfdf3;
+      color: #16a34a;
+    }
+
+    &--completed {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+  }
+
+  &__level {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b7280;
+  }
+
+
+  &__title {
+    margin: 0;
+
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 700;
+
+    color: #1f2430;
+  }
+
+  &__description {
+    margin: -8px 0 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    color: #6b7280;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+
+
+  &__info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  &__info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    padding: 10px;
+
+    background: #f8f9fb;
+    border-radius: 10px;
+  }
+
+  &__info-label {
+    font-size: 11px;
+    color: #8b92a1;
+  }
+
+  &__info-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #343946;
+  }
+
+
+
+  &__progress {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  &__progress-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__progress-title {
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  &__progress-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4f46e5;
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    background: #e8eaf0;
+    border-radius: 999px;
+  }
+
+  &__progress-fill {
+    height: 100%;
+
+    background: #4f46e5;
+    border-radius: inherit;
+
+    transition: width 0.3s ease;
+  }
+
+
+
+  &__schedule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding-top: 2px;
+
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  &__schedule strong {
+    font-weight: 600;
+    color: #343946;
+  }
+
+
+
+
+  &__open-btn {
+    width: 100%;
+
+    margin-top: auto;
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #4f46e5;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      transform 0.15s ease;
+
+    &:hover {
+      background: #4338ca;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+
+
+
+.dark {
+  .teacher-courses {
+    background: #0b0d11;
+    color: #f1f3f5;
+
+    &__title {
+      color: #f1f3f5;
+    }
+
+    &__subtitle {
+      color: #858b98;
+    }
+  }
+
+  .course-card {
+    background: #13161c;
+    border: 1px solid #242832;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+    &:hover {
+      transform: translateY(-2px);
+      background: #161920;
+      border-color: #343946;
+
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    }
+
+
+
+    &__top {
+      color: #f1f3f5;
+    }
+
+
+    &__title {
+      color: #f1f3f5;
+    }
+
+
+    &__description {
+      color: #858b98;
+    }
+
+
+    &__level {
+      color: #8b92a0;
+    }
+
+    &__status {
+      &--planned {
+        background: #20233a;
+        color: #8b8ff7;
+      }
+
+      &--active {
+        background: #14291e;
+        color: #4ade80;
+      }
+
+      &--completed {
+        background: #252830;
+        color: #9ca3af;
+      }
+    }
+
+    &__info-item {
+      background: #1b1f27;
+      border: 1px solid #292e38;
+    }
+
+    &__info-label {
+      color: #777f8d;
+    }
+
+    &__info-value {
+      color: #e5e7eb;
+    }
+
+
+
+    &__progress-title {
+      color: #858b98;
+    }
+
+    &__progress-value {
+      color: #818cf8;
+    }
+
+    &__progress-bar {
+      background: #292e38;
+    }
+
+    &__progress-fill {
+      background: #6366f1;
+    }
+
+    &__schedule {
+      color: #858b98;
+    }
+
+    &__schedule strong {
+      color: #e5e7eb;
+    }
+
+
+    &__open-btn {
+      background: #4f46e5;
+      color: #ffffff;
+
+      &:hover {
+        background: #6366f1;
+      }
+
+      &:active {
+        background: #4338ca;
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .teacher-courses {
+    padding: 20px 16px;
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__header {
+      flex-direction: column;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .course-card {
+    padding: 16px;
+
+    &__info {
+      grid-template-columns: 1fr;
+    }
+  }
+}

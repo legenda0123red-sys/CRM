@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-import { deleteCourse } from "../../features/CreateCourse/model/createSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../app/store";
 import { OpenW } from "../../features/AssignStudent";
@@ -12,7 +11,7 @@ function OneCourseCard() {
   const { id } = useParams();
 
   const courses = useSelector(
-    (state: RootState) => state.createCourseModalReducer.base,
+    (state: RootState) => state.courseReducer.courses,
   );
 
   const course = courses.find((course) => course.id === Number(id));
@@ -144,7 +143,7 @@ function OneCourseCard() {
           </button>
 
           <button
-            onClick={() => dispatch(deleteCourse(Number(course.id)))}
+       
             className="rounded-xl bg-red-500 px-6 py-3 font-semibold text-white transition hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-700"
           >
             {t("delete")}

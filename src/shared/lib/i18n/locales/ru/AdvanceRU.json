@@ -1,0 +1,13 @@
+{
+     "title": "Прогресс студентов",
+    "description": "Отслеживайте обучение студентов курса",
+    "course": "Курс",
+    "students": "Студенты",
+    "studentsCount": "{{count}} студентов",
+    "completed": "Завершили",
+    "inProgress": "В процессе",
+    "completedStatus": "Завершено",
+    "averageProgress": "Средний прогресс",
+    "lessonsCompleted": "Уроков пройдено",
+    "progress": "Прогресс"
+}

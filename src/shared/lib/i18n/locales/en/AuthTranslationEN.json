@@ -29,7 +29,10 @@
     "hasAccount": "Already have an account?",
     "login": "Sign in",
     "username": "Username",
-     "usernamePlaceholder": "Your username"
+     "usernamePlaceholder": "Your username",
+     "NewAdmin": "Create a new administrator",
+     "CreateAdmin": "Create Admin",
+     "AdminCancel": "Cancel"
   },
   "common": {
     "brand": "CourseFlow",

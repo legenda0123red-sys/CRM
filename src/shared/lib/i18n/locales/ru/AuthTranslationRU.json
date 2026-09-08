@@ -30,7 +30,10 @@
     "hasAccount": "Уже есть аккаунт?",
     "login": "Войти",
     "username": "Фамилия",
-    "usernamePlaceholder": "Ваше фамилия"
+    "usernamePlaceholder": "Ваше фамилия",
+     "NewAdmin": "Создание нового администратора",
+     "CreateAdmin": "Создать Админа",
+     "AdminCancel": "Отмена"
   },
   "common": {
     "brand": "CourseFlow",

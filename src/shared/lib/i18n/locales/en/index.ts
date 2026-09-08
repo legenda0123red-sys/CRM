@@ -6,8 +6,13 @@ import CourseEN from "./CourseEN.json";
 import ErrorsEN from "./ErrorsEN.json";
 import EmployeesEN from "./EmployeesEN.json";
 import ForgotEN from "./ForgotEN.json";
-
+import TasksEN from './Tasks.json';
+import AttenEN from './AttendanceEN.json';
+import AdvanceEN from './AdvanceEN.json'
 export {
+  AdvanceEN,
+  AttenEN,
+  TasksEN,
   DashTranslationEn,
   TotalTableEN,
   ControlsEn,

@@ -4,9 +4,10 @@ import { useState } from "react";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { useTranslation } from "react-i18next";
 import {
-  addStudent,
   type IStudent,
 } from "../../../entities/student/model/studentSlice";
+import { createStudent, getStudents } from "../../../entities/student/api/studentApi";
+
 function CreateStudents() {
   const { t, i18n } = useTranslation("course");
   const dispatch = useDispatch<AppDispatch>();
@@ -20,8 +21,9 @@ function CreateStudents() {
     parentsPhone: "",
     courses: [],
   });
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (
       !userData.name.trim() ||
       !userData.username.trim() ||
@@ -33,15 +35,21 @@ function CreateStudents() {
       return;
     }
 
-    dispatch(addStudent({ ...userData, id: Date.now() }));
-    dispatch(closeWindow());
-    setUserData({
-      name: "",
-      username: "",
-      phone: "",
-      parentsPhone: "",
-      courses: [],
-    });
+    try {
+      await dispatch(createStudent(userData)).unwrap();
+      await dispatch(getStudents()).unwrap()
+      dispatch(closeWindow());
+
+      setUserData({
+        name: "",
+        username: "",
+        phone: "",
+        parentsPhone: "",
+        courses: [],
+      });
+    } catch (error) {
+      console.error("Ошибка создания студента:", error);
+    }
   };
 
   if (!IsOpen) return null;
