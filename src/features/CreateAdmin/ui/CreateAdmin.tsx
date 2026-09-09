@@ -35,13 +35,7 @@ function CreateAdmin() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (
-      !user.firstName ||
-      !user.email ||
-      !user.password ||
-      !user.confirmPassword ||
-      !user.lastName
-    ) {
+    if (!user.firstName || !user.email || !user.password || !user.lastName) {
       showMessage("Ошибка, поля пустые", "red");
       return;
     }
@@ -56,10 +50,10 @@ function CreateAdmin() {
       return;
     }
 
-    if (user.password !== user.confirmPassword) {
-      showMessage("Ошибка, пароли не совпадают", "red");
-      return;
-    }
+    // if (user.password !== user.confirmPassword) {
+    //   showMessage("Ошибка, пароли не совпадают", "red");
+    //   return;
+    // }
 
     const newUser: RegistrData = {
       firstName:
@@ -77,7 +71,6 @@ function CreateAdmin() {
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: "",
       });
       showMessage("Succesfull!", "green");
       dispatch(closeAdmin());

@@ -287,7 +287,7 @@ function CourseAdmin() {
               </div>
 
               <Link
-                to="/dashboard/course/details"
+                to={`/course/${item.id}`}
                 state={item}
                 className="mt-4"
               >

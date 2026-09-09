@@ -31,7 +31,7 @@ function App() {
       <Route path="/course" element={<StudentsAdmin />} />
       <Route path="/settings" element={<Setting />} />
       <Route path="/registr" element={<Registr />} />
-      <Route path="/dashboard/course/:id" element={<OneCourse />} />
+      <Route path="/course/:id" element={<OneCourse />} />
       <Route path="/login" element={<Login />} />
       <Route path="forgot" element={<ChangePass />} />
       <Route path="/employees" element={<EmployeesAdmin />} />

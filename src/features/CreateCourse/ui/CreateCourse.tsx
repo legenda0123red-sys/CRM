@@ -173,7 +173,6 @@ function CreateCourse() {
             <label className="form-label-sm">{t("maxStudents")}</label>
             <input
               required
-              min="1"
               value={database.maxStudents}
               onChange={(e) => setDataBase({ ...database, maxStudents: Number(e.target.value) })}
               type="number"
@@ -351,9 +350,10 @@ function CreateCourse() {
           <label className="form-label">{t("coursePrice")}</label>
           <input
             required
+            min='0'
             value={database.price}
             onChange={(e) => setDataBase({ ...database, price: Number(e.target.value) })}
-            type="text"
+            type="number"
             placeholder={t("coursePrice")}
             className="form-input"
           />
