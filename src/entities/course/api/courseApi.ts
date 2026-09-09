@@ -22,9 +22,11 @@ export interface ICourse {
   price: number;
   status: "planned" | "active" | "completed";
 }
+export type CreateCourseData = Omit<ICourse, "id">;
 
 interface CourseState {
   courses: ICourse[];
+  currentCourse: ICourse | null;
   loading: boolean;
   error: string | null;
 }
@@ -33,11 +35,12 @@ const initialState: CourseState = {
   courses: [],
   loading: false,
   error: null,
+  currentCourse: null,
 };
 
 export const createCourse = createAsyncThunk(
   "courses/create",
-  async (course: ICourse) => {
+  async (course: CreateCourseData) => {
     return await apiFetch("/courses/create", {
       method: "POST",
       body: JSON.stringify(course),
@@ -45,12 +48,16 @@ export const createCourse = createAsyncThunk(
   },
 );
 
-export const getCourses = createAsyncThunk(
-  "courses/all",
-  async () => {
-    return await apiFetch("/courses/all");
+export const getCourseById = createAsyncThunk(
+  "course/getById",
+  async (id: string) => {
+    return await apiFetch(`/courses/one/${id}`);
   },
 );
+
+export const getCourses = createAsyncThunk("courses/all", async () => {
+  return await apiFetch("/courses/all");
+});
 
 const courseSlice = createSlice({
   name: "courses",
@@ -90,6 +97,20 @@ const courseSlice = createSlice({
       .addCase(createCourse.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Не удалось создать курс";
+      })
+      .addCase(getCourseById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(getCourseById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentCourse = action.payload;
+      })
+
+      .addCase(getCourseById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Ошибка";
       });
   },
 });

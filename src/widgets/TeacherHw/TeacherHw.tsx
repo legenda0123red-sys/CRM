@@ -39,15 +39,15 @@ function TeacherHw() {
 
         <div className="hw-tasks">
           {loading ? (
-            <p className="flex h-full min-h-75 items-center justify-center text-lg">
+            <p className="ml-128">
               Загрузка заданий...
             </p>
           ) : error ? (
-            <p className="flex h-full min-h-75 items-center justify-center text-lg text-red-500">
+            <p className="ml-128 text-red-500">
               {error}
             </p>
           ) : homework.length === 0 ? (
-            <p className="flex h-full min-h-75 items-center justify-center text-lg">
+            <p className="ml-128">
               Заданий пока нет
             </p>
           ) : (

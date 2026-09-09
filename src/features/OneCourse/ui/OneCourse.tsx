@@ -1,29 +1,47 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import { DashAdmin } from "../../../widgets/DashAdmin";
 import { Header } from "../../../widgets/Header";
 import { OneCourseCard } from "../../../widgets/OneCourseCard";
 import { TotalAdmin } from "../../../widgets/TotalAdmin";
 import { AssignStudent } from "../../AssignStudent";
-function OneCourse() {
-    return(
-        <>
-        <div className="app-layout flex min-h-screen bg-white dark:bg-gray-900">
-        <DashAdmin />
 
-        <div className="ml-67 min-h-screen flex-1 flex flex-col bg-purple-700  dark:bg-gray-800 ">
-          <header className="header py-4 px-8 ">
-            <Header />
-          </header>
- 
-          <main className="content flex-1 bg-white py-6 px-8 overflow-x-auto dark:bg-gray-900">
-            <TotalAdmin />
-            <AssignStudent />
-            <section className="oneCourse-card">
-              <OneCourseCard />
-            </section>
-          </main>
-        </div>
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../../app/store";
+import { getCourseById } from "../../../entities/course/api/courseApi";
+
+function OneCourse() {
+  const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getCourseById(id));
+    }
+  }, [id, dispatch]);
+
+  return (
+    <div className="app-layout flex min-h-screen bg-white dark:bg-gray-900">
+      <DashAdmin />
+
+      <div className="ml-67 min-h-screen flex-1 flex flex-col bg-purple-700 dark:bg-gray-800">
+        <header className="header py-4 px-8">
+          <Header />
+        </header>
+
+        <main className="content flex-1 bg-white py-6 px-8 overflow-x-auto dark:bg-gray-900">
+          <TotalAdmin />
+
+          <AssignStudent />
+
+          <section className="oneCourse-card">
+            <OneCourseCard />
+          </section>
+        </main>
       </div>
-        </>
-    )
+    </div>
+  );
 }
+
 export default OneCourse;
