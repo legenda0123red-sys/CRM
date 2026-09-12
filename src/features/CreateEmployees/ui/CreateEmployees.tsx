@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
 import {
-  addEmployee,
   closeEmployeesW,
   type ICreateEmployees,
   type IMessage,
 } from "../model/createEmployees";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-
+import { createEmployeesApi } from "../../../entities/employees/api/employessApi";
 
 function CreateEmployees() {
-  const {i18n, t } = useTranslation("employees");
+  const { i18n, t } = useTranslation("employees");
   const dispatch = useDispatch<AppDispatch>();
   const [employee, setEmployee] = useState<ICreateEmployees>({
     fullName: "",
@@ -33,7 +32,7 @@ function CreateEmployees() {
     }, 2000);
   }
 
-  function SendDataEmployee() {
+  async function SendDataEmployee() {
     if (!employee.fullName || !employee.email || !employee.role) {
       showMessage("inputs are empty", "red");
       return;
@@ -43,8 +42,10 @@ function CreateEmployees() {
       showMessage("You forgot write the @", "red");
       return;
     }
-
-    dispatch(addEmployee(employee));
+    const newEmployee = {
+      ...employee,
+    };
+    await dispatch(createEmployeesApi(newEmployee)).unwrap();
     showMessage("Succesful!", "green");
   }
 
@@ -52,11 +53,14 @@ function CreateEmployees() {
   return (
     <>
       <div
-      key={i18n.language}
-      className="language-fade fixed inset-0 bg-black/45 flex items-center justify-center z-50">
+        key={i18n.language}
+        className="language-fade fixed inset-0 bg-black/45 flex items-center justify-center z-50"
+      >
         <div className="bg-white rounded-xl px-6 py-10 w-120  border border-gray-300 dark:bg-gray-800">
           <div className="flex items-center justify-between mb-5">
-            <h3 className="text-xl font-bold dark:text-white">{t("NewEmployee")}</h3>
+            <h3 className="text-xl font-bold dark:text-white">
+              {t("NewEmployee")}
+            </h3>
             <button
               onClick={() => dispatch(closeEmployeesW())}
               className="cursor-pointer text-lg font-extrabold dark:text-white"
@@ -111,16 +115,25 @@ function CreateEmployees() {
               <option className="font-semibold text-gray-600" value="" disabled>
                 {t("SelectRole")}
               </option>
-              <option className="font-semibold text-gray-600" value="Менеджер продаж">
+              <option
+                className="font-semibold text-gray-600"
+                value="Менеджер продаж"
+              >
                 {t("Manager")}{" "}
               </option>
-              <option className="font-semibold text-gray-600" value="Преподаватель">
+              <option
+                className="font-semibold text-gray-600"
+                value="Преподаватель"
+              >
                 {t("Teacher")}
               </option>
               <option className="font-semibold text-gray-600" value="Куратор">
                 {t("Curator")}
               </option>
-              <option className="font-semibold text-gray-600" value="Администратор">
+              <option
+                className="font-semibold text-gray-600"
+                value="Администратор"
+              >
                 {t("Administrator")}
               </option>
             </select>

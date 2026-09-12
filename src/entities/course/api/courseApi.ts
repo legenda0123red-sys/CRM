@@ -9,7 +9,7 @@ export interface ICourse {
   maxStudents: number;
   studentIds: string[];
   Mentors: number;
-  lessons: string;
+  lessons: number;
   completedLessons: number;
   startDate: string;
   endDate: string;
@@ -58,6 +58,22 @@ export const getCourseById = createAsyncThunk(
 export const getCourses = createAsyncThunk("courses/all", async () => {
   return await apiFetch("/courses/all");
 });
+
+export const assignStudentsToCourse = createAsyncThunk(
+  "course/assignStudents",
+  async ({
+    courseId,
+    studentIds,
+  }: {
+    courseId: number;
+    studentIds: number[];
+  }) => {
+    return await apiFetch(`/courses/assign/${courseId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ studentIds }),
+    });
+  },
+);
 
 const courseSlice = createSlice({
   name: "courses",

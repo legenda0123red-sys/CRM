@@ -1,1 +1,1 @@
-export {default as Setting} from './AdminSetting'
+export {default as Setting} from './Setting'

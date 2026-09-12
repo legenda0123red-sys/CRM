@@ -1,14 +1,32 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { getStudents } from "../api/studentApi";
 
+export interface IStudentUser {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: "ADMIN" | "TEACHER" | "STUDENT";
+  isBlocked: boolean;
+}
+
 export interface IStudent {
-  id?: number;
-  name: string;
+  id: number;
   username: string;
   phone: string;
   parentsPhone: string;
   courses: string[];
   here: boolean;
+  user: IStudentUser;
+}
+
+export interface CreateStudentDto {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  parentsPhone: string;
 }
 
 interface StudentState {

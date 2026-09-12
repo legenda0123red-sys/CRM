@@ -53,9 +53,9 @@ function TeacherHw() {
           ) : (
             homework.map((hw, index) => (
               <div className="hw-card" key={index}>
-                <h1 className="hw-card__title">📚 Title: {hw.title}</h1>
+                <h1 className="hw-card__title"> {hw.title}</h1>
 
-                <p className="hw-card__desc">{hw.desc}</p>
+                <p className="hw-card__desc">{hw.desc}</p> 
 
                 <div className="hw-card__controler">
                   <p className="hw-card__deadline">

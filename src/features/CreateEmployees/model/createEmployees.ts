@@ -1,20 +1,24 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-export interface ICreateEmployees {
-  id?: number;
+import {
+  createEmployeesApi,
+  getEmployees,
+} from "../../../entities/employees/api/employessApi";
+
+export type EmployeeRole =
+  | ""
+  | "Менеджер"
+  | "Преподаватель"
+  | "Куратор"
+  | "Администратор";
+
+export interface IEmployees {
+  id: number;
   fullName: string;
   email: string;
-  role: "" | "Менеджер" | "Преподаватель" | "Куратор" | "Администратор";
+  role: EmployeeRole;
 }
 
-// export interface Employee {
-//   id: number;
-//   initials: string;
-//   name: string;
-//   email?: string;
-//   role: string;
-//   groups: number | null;
-//   avatarClass: string;
-// }
+export type ICreateEmployees = Omit<IEmployees, "id">;
 
 export interface IMessage {
   text: string;
@@ -23,40 +27,19 @@ export interface IMessage {
 
 export interface IEmployeesModal {
   open: boolean;
+  loading: boolean;
+  error: string | null;
 }
 
 export interface IEmployeesState extends IEmployeesModal {
-  list: ICreateEmployees[];
+  list: IEmployees[];
 }
 
 const initialState: IEmployeesState = {
-  list: [
-    {
-      id: 1,
-      fullName: "Анна Соколова",
-      email: "anna@company.com",
-      role: "Менеджер",
-    },
-    {
-      id: 2,
-      fullName: "Дмитрий Ковалёв",
-      email: "dmitry@company.com",
-      role: "Преподаватель",
-    },
-    {
-      id: 3,
-      fullName: "Мария Петрова",
-      email: "maria@company.com",
-      role: "Куратор",
-    },
-    {
-      id: 4,
-      fullName: "Игорь Волков",
-      email: "igor@company.com",
-      role: "Администратор",
-    },
-  ],
-  open: false
+  list: [],
+  open: false,
+  loading: false,
+  error: null,
 };
 
 const createEmployeesSlice = createSlice({
@@ -64,15 +47,11 @@ const createEmployeesSlice = createSlice({
   initialState,
 
   reducers: {
-    addEmployee: (state, action: PayloadAction<ICreateEmployees>) => {
-      state.list.push(action.payload);
-    },
-
     changeRole: (
       state,
       action: PayloadAction<{
         employeeId: number;
-        role: ICreateEmployees["role"];
+        role: IEmployees["role"];
       }>,
     ) => {
       const employee = state.list.find(
@@ -84,14 +63,48 @@ const createEmployeesSlice = createSlice({
       }
     },
 
-  closeEmployeesW(state) {
-    state.open = false
+    closeEmployeesW(state) {
+      state.open = false;
+    },
+    openEmployeesW(state) {
+      state.open = true;
+    },
   },
-  openEmployeesW(state) {
-    state.open = true
-  }
+  extraReducers(builder) {
+    builder
+      .addCase(getEmployees.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getEmployees.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.list = action.payload;
+      })
+      .addCase(getEmployees.rejected, (state) => {
+        state.loading = false;
+        state.error = "Не удается получить студентов";
+      })
+
+      .addCase(createEmployeesApi.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        createEmployeesApi.fulfilled,
+        (state, action: PayloadAction<IEmployees>) => {
+          state.loading = false;
+          state.error = null;
+          state.list.push(action.payload);
+        },
+      )
+      .addCase(createEmployeesApi.rejected, (state) => {
+        state.loading = false;
+        state.error = "Не удается создать работника";
+      });
   },
 });
 
-export const { addEmployee, openEmployeesW, closeEmployeesW, changeRole } = createEmployeesSlice.actions;
+export const { openEmployeesW, closeEmployeesW, changeRole } =
+  createEmployeesSlice.actions;
 export const createEmployeesReducer = createEmployeesSlice.reducer;

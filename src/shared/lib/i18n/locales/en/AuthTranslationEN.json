@@ -32,7 +32,11 @@
      "usernamePlaceholder": "Your username",
      "NewAdmin": "Create a new administrator",
      "CreateAdmin": "Create Admin",
-     "AdminCancel": "Cancel"
+     "AdminCancel": "Cancel",
+     "PhonePlaceholder": "Your phone",
+     "phone": "Phone",
+     "phoneparents": "Parents phone",
+     "PhoneParentsPlaceholder": "Your parents phone"
   },
   "common": {
     "brand": "CourseFlow",

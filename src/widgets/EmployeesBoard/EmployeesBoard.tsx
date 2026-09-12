@@ -15,7 +15,7 @@ function EmployeesBoard() {
 
   const administratorsStatic = useMemo(() => {
     return employeeStatic.filter((item) => item.role === "Администратор");
-  }, [employeeStatic]);
+  }, [employeeStatic]); 
 
   const teachersStatic = useMemo(() => {
     return employeeStatic.filter((item) => item.role === "Преподаватель");
