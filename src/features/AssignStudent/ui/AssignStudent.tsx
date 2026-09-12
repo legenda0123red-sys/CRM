@@ -4,8 +4,12 @@ import { closeW } from "../model/AssignStudentSlice";
 import { AssignSearch } from "../../AssignSearch";
 import { AssignStudentCard } from "../../../widgets/AssignStudentCard";
 import { useTranslation } from "react-i18next";
+import { assignStudentsToCourse } from "../../../entities/course/api/courseApi";
 
 function AssignStudent() {
+  const courseId = useSelector((state: RootState) => state.AssignStudentReducer.courseId);
+  const selectedIds = useSelector((state: RootState) => state.AssignStudentReducer.selectedIds);
+
   const {t, i18n} = useTranslation('course')
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector(
@@ -13,6 +17,17 @@ function AssignStudent() {
   );
 
   if (!isOpen) return null;
+
+   const handleAdd = async () => {
+    if (courseId === null || selectedIds.length === 0) return;
+
+    try {
+      await dispatch(assignStudentsToCourse({ courseId, studentIds: selectedIds })).unwrap();
+      dispatch(closeW());
+    } catch (error) {
+      console.error("Ошибка добавления студентов:", error);
+    }
+  };
   return (
     <>
       <div
@@ -59,6 +74,7 @@ function AssignStudent() {
             </button>
 
             <button
+            onClick={handleAdd}
               className="
           px-6
           py-3

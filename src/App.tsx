@@ -19,6 +19,7 @@ import { CreateTasks } from "./features/CreateTasks";
 import { TeacherAtten } from "./widgets/TeacherAtten";
 import { TeacherAdvance } from "./widgets/TeacherAdvance";
 import { Setting } from "./widgets/AdminSetting";
+import { UsersAdmin } from "./widgets/UsersAdmin";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="forgot" element={<ChangePass />} />
       <Route path="/employees" element={<EmployeesAdmin />} />
+      <Route path="/users" element={<UsersAdmin />}/>
       <Route path="/user" element={<DashLayoutUser />}>
         <Route index element={<UserMyCourses />} />
         <Route path="Hw" element={<UserHw />} />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -10,11 +10,11 @@ import {
   changeRole,
   type ICreateEmployees,
 } from "../../CreateEmployees/model/createEmployees";
+import { getEmployees } from "../../../entities/employees/api/employessApi";
 
 const statuses: Status[] = ["Active", "On leave", "Sick", "Inactive"];
 
 const roles: ICreateEmployees["role"][] = [
-  "",
   "Менеджер",
   "Преподаватель",
   "Куратор",
@@ -74,10 +74,12 @@ const EmployeesCards = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const employeeList = useSelector(
-    (state: RootState) => state.createEmployeesReducer.list,
+  const { list, error, loading } = useSelector(
+    (state: RootState) => state.createEmployeesReducer,
   );
-
+useEffect(() => {
+  dispatch(getEmployees())
+}, [dispatch])
   const statusById = useSelector(
     (state: RootState) => state.statusReducer.byEmployeeId,
   );
@@ -89,7 +91,13 @@ const EmployeesCards = () => {
     employeeId: number,
     newStatus: Status,
   ) => {
-    dispatch(changeStatus({ employeeId, status: newStatus }));
+    dispatch(
+      changeStatus({
+        employeeId,
+        status: newStatus,
+      }),
+    );
+
     setOpenStatusId(null);
   };
 
@@ -97,171 +105,228 @@ const EmployeesCards = () => {
     employeeId: number,
     newRole: ICreateEmployees["role"],
   ) => {
-    dispatch(changeRole({ employeeId, role: newRole }));
+    dispatch(
+      changeRole({
+        employeeId,
+        role: newRole,
+      }),
+    );
+
     setOpenRoleId(null);
   };
 
+  useEffect(() => {
+    dispatch(getEmployees());
+  }, [dispatch]);
+
+  const isCreateEmployeeOpen = useSelector(
+  (state: RootState) => state.createEmployeesReducer.open,
+);
+
   return (
-    <div key={i18n.language} className="flex flex-col gap-3">
-      {employeeList.slice(0, 10).map((employee) => {
-        if (!employee.id) return null;
+    <div key={i18n.language}>
+      {loading && !isCreateEmployeeOpen && (
+        <div className="fixed left-220 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
+          <div className="flex min-w-55 flex-col items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-5 shadow-xl">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-[#036f6f]" />
 
-        const status = statusById[employee.id] ?? "Inactive";
-        const statusStyles = getStatusStyles(status);
+            <p className="text-sm font-semibold text-gray-700">
+              Загрузка сотрудников...
+            </p>
+          </div>
+        </div>
+      )}
 
-        return (
-          <div
-            key={employee.id}
-            className="group flex items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-3.5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
-          >
-            <div className="flex min-w-0 flex-1 items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-800">
-                {getInitials(employee.fullName) || (
-                  <i className="ti ti-user text-base"></i>
-                )}
-              </div>
-
-              <div className="min-w-0">
-                <p className="truncate font-medium leading-tight">
-                  {employee.fullName}
-                </p>
-
-                <p className="mt-0.5 truncate text-xs text-gray-400">
-                  {employee.email}
-                </p>
-              </div>
+      {!loading && error && !isCreateEmployeeOpen &&(
+        <div className="fixed left-220 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
+          <div className="flex min-w-55 flex-col items-center justify-center gap-3 rounded-xl border border-red-200 bg-white px-6 py-5 shadow-xl">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500">
+              <span className="text-lg font-bold text-white">×</span>
             </div>
 
-            <div className="hidden w-40 shrink-0 text-sm sm:block">
-              <p className="mb-0.5 text-xs text-gray-400">
-                {t("EmployeeRole")}
-              </p>
+            <p className="text-sm font-semibold text-red-600">
+              {error}
+            </p>
+          </div>
+        </div>
+      )}
 
-              <div className="relative inline-block">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenRoleId(
-                      openRoleId === employee.id
-                        ? null
-                        : employee.id!,
-                    )
-                  }
-                  className="inline-flex items-center gap-1 text-left hover:text-gray-600"
-                >
-                  <span className="truncate">
-                    {employee.role
-                      ? t(roleTranslationKeys[employee.role])
-                      : "—"}
-                  </span>
-
-                  <i
-                    className={`ti ${
-                      openRoleId === employee.id
-                        ? "ti-chevron-up"
-                        : "ti-chevron-down"
-                    } shrink-0 text-xs`}
-                  ></i>
-                </button>
-
-                {openRoleId === employee.id && (
-                  <div className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border border-gray-200 bg-white p-1 shadow-lg">
-                    {roles.map((role) => (
-                      <button
-                        key={role}
-                        type="button"
-                        onClick={() =>
-                          handleChangeRole(employee.id!, role)
-                        }
-                        className={`flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-gray-50 ${
-                          employee.role === role
-                            ? "bg-gray-50 font-medium"
-                            : ""
-                        }`}
-                      >
-                        {t(roleTranslationKeys[role])}
-
-                        {employee.role === role && (
-                          <i className="ti ti-check ml-auto text-green-600"></i>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+      {!loading && !error && list.length === 0 && !isCreateEmployeeOpen &&(
+        <div className="fixed left-220 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
+          <div className="flex min-w-55 flex-col items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white px-6 py-5 shadow-xl">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-400">
+              <span className="text-lg font-bold text-white">!</span>
             </div>
 
-            <div className="w-36 shrink-0 text-sm">
-              <p className="mb-0.5 text-xs text-gray-400">
-                {t("EmployeeStatus")}
-              </p>
+            <p className="text-sm font-semibold text-gray-600">
+              Сотрудников пока нет
+            </p>
+          </div>
+        </div>
+      )}
+      <div className="cards flex flex-col gap-5">
 
-              <div className="relative inline-block">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenStatusId(
-                      openStatusId === employee.id
-                        ? null
-                        : employee.id!,
-                    )
-                  }
-                  className={`inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-2 py-1 text-xs ${statusStyles.wrapper}`}
-                >
-                  <i
-                    className={`ti ${statusStyles.icon} text-sm`}
-                  ></i>
+      {!loading &&
+        !error &&
+        list.length > 0 &&
+        list.slice(0, 10).map((employee) => {
+          const status = statusById[employee.id] ?? "Inactive";
+          const statusStyles = getStatusStyles(status);
 
-                  {status}
+          return (
+            <div
+              key={employee.id}
+              className="group flex items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-3.5 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md"
+            >
+              <div className="flex min-w-0 flex-1 items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-medium text-blue-800">
+                  {getInitials(employee.fullName) || (
+                    <i className="ti ti-user text-base"></i>
+                  )}
+                </div>
 
-                  <i
-                    className={`ti ${
-                      openStatusId === employee.id
-                        ? "ti-chevron-up"
-                        : "ti-chevron-down"
-                    } text-xs`}
-                  ></i>
-                </button>
+                <div className="min-w-0">
+                  <p className="truncate font-medium leading-tight">
+                    {employee.fullName}
+                  </p>
 
-                {openStatusId === employee.id && (
-                  <div className="absolute left-0 top-full z-50 mt-2 w-44 rounded-lg border border-gray-200 bg-white p-1 shadow-lg">
-                    {statuses.map((s) => {
-                      const styles = getStatusStyles(s);
+                  <p className="mt-0.5 truncate text-xs text-gray-400">
+                    {employee.email}
+                  </p>
+                </div>
+              </div>
 
-                      return (
+              <div className="hidden w-40 shrink-0 text-sm sm:block">
+                <p className="mb-0.5 text-xs text-gray-400">
+                  {t("EmployeeRole")}
+                </p>
+
+                <div className="relative inline-block">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenRoleId(
+                        openRoleId === employee.id
+                          ? null
+                          : employee.id,
+                      )
+                    }
+                    className="inline-flex items-center gap-1 text-left hover:text-gray-600"
+                  >
+                    <span className="truncate">
+                      {employee.role
+                        ? t(roleTranslationKeys[employee.role])
+                        : "—"}
+                    </span>
+
+                    <i
+                      className={`ti ${
+                        openRoleId === employee.id
+                          ? "ti-chevron-up"
+                          : "ti-chevron-down"
+                      } shrink-0 text-xs`}
+                    ></i>
+                  </button>
+
+                  {openRoleId === employee.id && (
+                    <div className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border border-gray-200 bg-white p-1 shadow-lg">
+                      {roles.map((role) => (
                         <button
-                          key={s}
+                          key={role}
                           type="button"
                           onClick={() =>
-                            handleChangeStatus(employee.id!, s)
+                            handleChangeRole(employee.id, role)
                           }
                           className={`flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-gray-50 ${
-                            status === s
+                            employee.role === role
                               ? "bg-gray-50 font-medium"
                               : ""
                           }`}
                         >
-                          <i
-                            className={`ti ${styles.icon} ${styles.wrapper} rounded-full p-1`}
-                          ></i>
+                          {t(roleTranslationKeys[role])}
 
-                          {s}
-
-                          {status === s && (
+                          {employee.role === role && (
                             <i className="ti ti-check ml-auto text-green-600"></i>
                           )}
                         </button>
-                      );
-                    })}
-                  </div>
-                )}
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
 
-            <i className="ti ti-chevron-right shrink-0 text-gray-300 transition-colors group-hover:text-gray-500"></i>
-          </div>
-        );
-      })}
+              <div className="w-36 shrink-0 text-sm">
+                <p className="mb-0.5 text-xs text-gray-400">
+                  {t("EmployeeStatus")}
+                </p>
+
+                <div className="relative inline-block">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenStatusId(
+                        openStatusId === employee.id
+                          ? null
+                          : employee.id,
+                      )
+                    }
+                    className={`inline-flex items-center gap-1.5 rounded-full py-1 pl-2.5 pr-2 text-xs ${statusStyles.wrapper}`}
+                  >
+                    <i
+                      className={`ti ${statusStyles.icon} text-sm`}
+                    ></i>
+
+                    {status}
+
+                    <i
+                      className={`ti ${
+                        openStatusId === employee.id
+                          ? "ti-chevron-up"
+                          : "ti-chevron-down"
+                      } text-xs`}
+                    ></i>
+                  </button>
+
+                  {openStatusId === employee.id && (
+                    <div className="absolute left-0 top-full z-50 mt-2 w-44 rounded-lg border border-gray-200 bg-white p-1 shadow-lg">
+                      {statuses.map((s) => {
+                        const styles = getStatusStyles(s);
+
+                        return (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() =>
+                              handleChangeStatus(employee.id, s)
+                            }
+                            className={`flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-gray-50 ${
+                              status === s
+                                ? "bg-gray-50 font-medium"
+                                : ""
+                            }`}
+                          >
+                            <i
+                              className={`ti ${styles.icon} ${styles.wrapper} rounded-full p-1`}
+                            ></i>
+
+                            {s}
+
+                            {status === s && (
+                              <i className="ti ti-check ml-auto text-green-600"></i>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <i className="ti ti-chevron-right shrink-0 text-gray-300 transition-colors group-hover:text-gray-500"></i>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

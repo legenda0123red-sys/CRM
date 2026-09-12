@@ -69,6 +69,8 @@ const Login = () => {
           navigate("/dashboard");
         } else if (result.user.role === "TEACHER") {
           navigate("/teacher");
+        } else {
+          navigate('/user')
         }
       }, 1000);
     } catch (error) {

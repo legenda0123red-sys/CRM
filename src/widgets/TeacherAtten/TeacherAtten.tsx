@@ -240,13 +240,13 @@ function TeacherAtten() {
                         dark:text-white!
                       "
                     >
-                      {student.name
+                      {student.user.firstName
                         .slice(0, 1)
                         .toUpperCase()}
                     </div>
 
                     <p className="dark:text-white!">
-                      {student.name}
+                      {student.user.lastName}
                     </p>
                   </div>
 

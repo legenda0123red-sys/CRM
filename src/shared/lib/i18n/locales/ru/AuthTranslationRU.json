@@ -33,7 +33,11 @@
     "usernamePlaceholder": "Ваше фамилия",
      "NewAdmin": "Создание нового администратора",
      "CreateAdmin": "Создать Админа",
-     "AdminCancel": "Отмена"
+     "AdminCancel": "Отмена",
+     "PhonePlaceholder": "Ваш телефон",
+     "phone": "Телефон",
+       "phoneparents": "Телефон родителя",
+     "PhoneParentsPlaceholder": "Телефон вашего родителя"
   },
   "common": {
     "brand": "CourseFlow",

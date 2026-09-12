@@ -8,18 +8,22 @@ export interface RegistrData {
   lastName: string;
   email: string;
   password: string;
-  confirmPassword?: string;
+  confirmPassword: string;
 }
+
 export interface IMessage {
   text: string;
   color: string;
 }
+
 const RegistrationForm = () => {
   const navigation = useNavigate();
+
   const [message, setMessage] = useState<IMessage>({
     text: "",
     color: "",
   });
+
   const [user, setUser] = useState<RegistrData>({
     firstName: "",
     lastName: "",
@@ -28,23 +32,39 @@ const RegistrationForm = () => {
     confirmPassword: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const { i18n, t } = useTranslation("auth");
+
   function showMessage(text: string, color: string) {
     setMessage({ text, color });
+
     setTimeout(() => {
       setMessage({ text: "", color: "" });
     }, 3000);
   }
 
+  const changeLng = (lng: "ru" | "en") => {
+    i18n.changeLanguage(lng);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!user.firstName || !user.email || !user.password || !user.confirmPassword || !user.lastName) {
-      showMessage("Ошибка, поля пустые", "red");
+    if (
+      !user.firstName ||
+      !user.lastName ||
+      !user.email ||
+      !user.password ||
+      !user.confirmPassword
+    ) {
+      showMessage("Ошибка, заполните все поля", "red");
       return;
     }
 
     if (!user.email.includes("@")) {
-      showMessage("Ошибка, ты забыл написать @", "red");
+      showMessage("Введите корректный email", "red");
       return;
     }
 
@@ -58,27 +78,36 @@ const RegistrationForm = () => {
       return;
     }
 
-    const newUser: RegistrData = {
-      firstName: user.firstName.trim()[0].toUpperCase() + user.firstName.trim().slice(1),
-      lastName: user.lastName.trim()[0].toUpperCase() + user.lastName.trim().slice(1),
-      email: user.email,
+    const newUser = {
+      firstName:
+        user.firstName.trim()[0].toUpperCase() + user.firstName.trim().slice(1),
+      lastName:
+        user.lastName.trim()[0].toUpperCase() + user.lastName.trim().slice(1),
+      email: user.email.trim(),
       password: user.password,
     };
 
-   await registerUser(newUser);
-    setUser({ firstName: '', lastName: "", email: "", password: "", confirmPassword: "" });
-    showMessage('Succesfull!', 'green');
-    setTimeout(() => {
-      navigation('/teacher');
-    }, 5000)
-  };
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    try {
+      await registerUser(newUser);
 
-  const { i18n, t } = useTranslation("auth");
+      setUser({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
 
-  const changeLng = (lng: "ru" | "en") => {
-    i18n.changeLanguage(lng);
+      showMessage("Успешная регистрация!", "green");
+
+      setTimeout(() => {
+        navigation("/login");
+      }, 2000);
+    } catch (error) {
+      if (error instanceof Error) {
+        showMessage(error.message, "red");
+      }
+    }
   };
 
   return (
@@ -104,16 +133,16 @@ const RegistrationForm = () => {
                 type="button"
                 onClick={() => changeLng("ru")}
                 className={`
-              cursor-pointer
-              rounded-lg px-3 py-1.5
-              text-sm font-semibold
-              transition-all duration-200
-              ${
-                i18n.language === "ru"
-                  ? "bg-white text-purple-700 shadow-sm"
-                  : "text-purple-400 hover:text-purple-700"
-              }
-            `}
+                  cursor-pointer
+                  rounded-lg px-3 py-1.5
+                  text-sm font-semibold
+                  transition-all duration-200
+                  ${
+                    i18n.language === "ru"
+                      ? "bg-white text-purple-700 shadow-sm"
+                      : "text-purple-400 hover:text-purple-700"
+                  }
+                `}
               >
                 RU
               </button>
@@ -122,16 +151,16 @@ const RegistrationForm = () => {
                 type="button"
                 onClick={() => changeLng("en")}
                 className={`
-              cursor-pointer
-              rounded-lg px-3 py-1.5
-              text-sm font-semibold
-              transition-all duration-200
-              ${
-                i18n.language === "en"
-                  ? "bg-white text-purple-700 shadow-sm"
-                  : "text-purple-400 hover:text-purple-700"
-              }
-            `}
+                  cursor-pointer
+                  rounded-lg px-3 py-1.5
+                  text-sm font-semibold
+                  transition-all duration-200
+                  ${
+                    i18n.language === "en"
+                      ? "bg-white text-purple-700 shadow-sm"
+                      : "text-purple-400 hover:text-purple-700"
+                  }
+                `}
               >
                 EN
               </button>
@@ -160,23 +189,28 @@ const RegistrationForm = () => {
 
             <input
               value={user.firstName}
-              onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  firstName: e.target.value,
+                })
+              }
               type="text"
               placeholder={t("register.namePlaceholder")}
               className="
-            w-full rounded-xl
-            border border-white/10
-            bg-white/10
-            px-4 py-3
-            text-white
-            outline-none
-            placeholder:text-purple-200/50
-            transition
-            focus:border-fuchsia-400
-            focus:bg-white/15
-            focus:ring-2
-            focus:ring-fuchsia-400/20
-          "
+                w-full rounded-xl
+                border border-white/10
+                bg-white/10
+                px-4 py-3
+                text-white
+                outline-none
+                placeholder:text-purple-200/50
+                transition
+                focus:border-fuchsia-400
+                focus:bg-white/15
+                focus:ring-2
+                focus:ring-fuchsia-400/20
+              "
             />
           </div>
 
@@ -187,23 +221,28 @@ const RegistrationForm = () => {
 
             <input
               value={user.lastName}
-              onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  lastName: e.target.value,
+                })
+              }
               type="text"
               placeholder={t("register.usernamePlaceholder")}
               className="
-            w-full rounded-xl
-            border border-white/10
-            bg-white/10
-            px-4 py-3
-            text-white
-            outline-none
-            placeholder:text-purple-200/50
-            transition
-            focus:border-fuchsia-400
-            focus:bg-white/15
-            focus:ring-2
-            focus:ring-fuchsia-400/20
-          "
+                w-full rounded-xl
+                border border-white/10
+                bg-white/10
+                px-4 py-3
+                text-white
+                outline-none
+                placeholder:text-purple-200/50
+                transition
+                focus:border-fuchsia-400
+                focus:bg-white/15
+                focus:ring-2
+                focus:ring-fuchsia-400/20
+              "
             />
           </div>
 
@@ -214,23 +253,28 @@ const RegistrationForm = () => {
 
             <input
               value={user.email}
-              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              onChange={(e) =>
+                setUser({
+                  ...user,
+                  email: e.target.value,
+                })
+              }
               type="email"
               placeholder={t("register.emailPlaceholder")}
               className="
-            w-full rounded-xl
-            border border-white/10
-            bg-white/10
-            px-4 py-3
-            text-white
-            outline-none
-            placeholder:text-purple-200/50
-            transition
-            focus:border-fuchsia-400
-            focus:bg-white/15
-            focus:ring-2
-            focus:ring-fuchsia-400/20
-          "
+                w-full rounded-xl
+                border border-white/10
+                bg-white/10
+                px-4 py-3
+                text-white
+                outline-none
+                placeholder:text-purple-200/50
+                transition
+                focus:border-fuchsia-400
+                focus:bg-white/15
+                focus:ring-2
+                focus:ring-fuchsia-400/20
+              "
             />
           </div>
 
@@ -242,35 +286,40 @@ const RegistrationForm = () => {
             <div className="relative">
               <input
                 value={user.password}
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                onChange={(e) =>
+                  setUser({
+                    ...user,
+                    password: e.target.value,
+                  })
+                }
                 type={showPassword ? "text" : "password"}
                 placeholder={t("register.passwordPlaceholder")}
                 className="
-              w-full rounded-xl
-              border border-white/10
-              bg-white/10
-              px-4 py-3 pr-12
-              text-white
-              outline-none
-              placeholder:text-purple-200/50
-              transition
-              focus:border-fuchsia-400
-              focus:bg-white/15
-              focus:ring-2
-              focus:ring-fuchsia-400/20
-            "
+                  w-full rounded-xl
+                  border border-white/10
+                  bg-white/10
+                  px-4 py-3 pr-12
+                  text-white
+                  outline-none
+                  placeholder:text-purple-200/50
+                  transition
+                  focus:border-fuchsia-400
+                  focus:bg-white/15
+                  focus:ring-2
+                  focus:ring-fuchsia-400/20
+                "
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
                 className="
-              absolute right-3 top-1/2
-              -translate-y-1/2
-              text-purple-200
-              transition
-              hover:text-white
-            "
+                  absolute right-3 top-1/2
+                  -translate-y-1/2
+                  text-purple-200
+                  transition
+                  hover:text-white
+                "
               >
                 {showPassword ? "🙈" : "👁️"}
               </button>
@@ -286,36 +335,39 @@ const RegistrationForm = () => {
               <input
                 value={user.confirmPassword}
                 onChange={(e) =>
-                  setUser({ ...user, confirmPassword: e.target.value })
+                  setUser({
+                    ...user,
+                    confirmPassword: e.target.value,
+                  })
                 }
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder={t("register.confirmPasswordPlaceholder")}
                 className="
-              w-full rounded-xl
-              border border-white/10
-              bg-white/10
-              px-4 py-3 pr-12
-              text-white
-              outline-none
-              placeholder:text-purple-200/50
-              transition
-              focus:border-fuchsia-400
-              focus:bg-white/15
-              focus:ring-2
-              focus:ring-fuchsia-400/20
-            "
+                  w-full rounded-xl
+                  border border-white/10
+                  bg-white/10
+                  px-4 py-3 pr-12
+                  text-white
+                  outline-none
+                  placeholder:text-purple-200/50
+                  transition
+                  focus:border-fuchsia-400
+                  focus:bg-white/15
+                  focus:ring-2
+                  focus:ring-fuchsia-400/20
+                "
               />
 
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
                 className="
-              absolute right-3 top-1/2
-              -translate-y-1/2
-              text-purple-200
-              transition
-              hover:text-white
-            "
+                  absolute right-3 top-1/2
+                  -translate-y-1/2
+                  text-purple-200
+                  transition
+                  hover:text-white
+                "
               >
                 {showConfirmPassword ? "🙈" : "👁️"}
               </button>
@@ -325,22 +377,22 @@ const RegistrationForm = () => {
           <button
             type="submit"
             className="
-          mt-2
-          w-full rounded-xl
-          bg-linear-to-r
-          from-violet-500
-          to-fuchsia-500
-          px-4 py-3
-          font-semibold
-          text-white
-          shadow-lg
-          shadow-fuchsia-900/30
-          transition
-          hover:scale-[1.01]
-          hover:from-violet-400
-          hover:to-fuchsia-400
-          active:scale-[0.99]
-        "
+              mt-2
+              w-full rounded-xl
+              bg-linear-to-r
+              from-violet-500
+              to-fuchsia-500
+              px-4 py-3
+              font-semibold
+              text-white
+              shadow-lg
+              shadow-fuchsia-900/30
+              transition
+              hover:scale-[1.01]
+              hover:from-violet-400
+              hover:to-fuchsia-400
+              active:scale-[0.99]
+            "
           >
             {t("register.submit")}
           </button>
@@ -350,11 +402,11 @@ const RegistrationForm = () => {
             <Link
               to="/login"
               className="
-            font-semibold
-            text-fuchsia-300
-            transition
-            hover:text-fuchsia-200
-          "
+                font-semibold
+                text-fuchsia-300
+                transition
+                hover:text-fuchsia-200
+              "
             >
               {t("register.login")}
             </Link>

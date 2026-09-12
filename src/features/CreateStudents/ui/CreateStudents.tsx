@@ -3,33 +3,40 @@ import { closeWindow } from "../model/createStudent";
 import { useState } from "react";
 import type { AppDispatch, RootState } from "../../../app/store";
 import { useTranslation } from "react-i18next";
+import { type CreateStudentDto } from "../../../entities/student/model/studentSlice";
 import {
-  type IStudent,
-} from "../../../entities/student/model/studentSlice";
-import { createStudent, getStudents } from "../../../entities/student/api/studentApi";
+  createStudent,
+  getStudents,
+} from "../../../entities/student/api/studentApi";
 
 function CreateStudents() {
   const { t, i18n } = useTranslation("course");
   const dispatch = useDispatch<AppDispatch>();
+
   const IsOpen = useSelector(
     (state: RootState) => state.createStudentReducer.Open,
   );
-  const [userData, setUserData] = useState<IStudent>({
-    name: "",
-    username: "",
+
+  const [userData, setUserData] = useState<CreateStudentDto>({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
     phone: "",
     parentsPhone: "",
-    courses: [],
   });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("ОТПРАВЛЯЕМ:", userData);
 
     if (
-      !userData.name.trim() ||
-      !userData.username.trim() ||
+      !userData.email.trim() ||
+      !userData.password.trim() ||
+      !userData.firstName.trim() ||
+      !userData.lastName.trim() ||
       !userData.phone.trim() ||
-      !userData.parentsPhone.trim() ||
-      userData.courses.length === 0
+      !userData.parentsPhone.trim()
     ) {
       alert("Заполните все поля");
       return;
@@ -37,15 +44,16 @@ function CreateStudents() {
 
     try {
       await dispatch(createStudent(userData)).unwrap();
-      await dispatch(getStudents()).unwrap()
+      await dispatch(getStudents()).unwrap();
       dispatch(closeWindow());
 
       setUserData({
-        name: "",
-        username: "",
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
         phone: "",
         parentsPhone: "",
-        courses: [],
       });
     } catch (error) {
       console.error("Ошибка создания студента:", error);
@@ -53,138 +61,115 @@ function CreateStudents() {
   };
 
   if (!IsOpen) return null;
+
   return (
     <>
       <div
         key={i18n.language}
-        className="language-fade fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+        className="language-fade fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       >
-        <div className="bg-white rounded-lg p-6 w-100 dark:bg-slate-900">
-          <h3 className="text-xl font-bold mb-4 dark:text-white">
+        <div className="w-100 rounded-lg bg-white p-6 dark:bg-slate-900">
+          <h3 className="mb-4 text-xl font-bold dark:text-white">
             {t("CreateStudent")}
           </h3>
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
               required
-              value={userData.name}
+              value={userData.firstName}
               onChange={(e) =>
-                setUserData({ ...userData, name: e.target.value })
+                setUserData({
+                  ...userData,
+                  firstName: e.target.value,
+                })
               }
               placeholder={t("StudentName")}
-              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
+              className="rounded border p-2 dark:text-white dark:placeholder:text-white"
               type="text"
             />
+
             <input
               required
-              value={userData.username}
+              value={userData.lastName}
               onChange={(e) =>
-                setUserData({ ...userData, username: e.target.value })
+                setUserData({
+                  ...userData,
+                  lastName: e.target.value,
+                })
               }
               placeholder={t("StudentUsername")}
-              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
+              className="rounded border p-2 dark:text-white dark:placeholder:text-white"
               type="text"
+            />
+
+            <input
+              required
+              value={userData.email}
+              onChange={(e) =>
+                setUserData({
+                  ...userData,
+                  email: e.target.value,
+                })
+              }
+              placeholder="Email"
+              className="rounded border p-2 dark:text-white dark:placeholder:text-white"
+              type="email"
+            />
+
+            <input
+              required
+              minLength={6}
+              value={userData.password}
+              onChange={(e) =>
+                setUserData({
+                  ...userData,
+                  password: e.target.value,
+                })
+              }
+              placeholder={t("StudentPass")}
+              className="rounded border p-2 dark:text-white dark:placeholder:text-white"
+              type="password"
             />
 
             <input
               required
               value={userData.phone}
               onChange={(e) =>
-                setUserData({ ...userData, phone: e.target.value })
+                setUserData({
+                  ...userData,
+                  phone: e.target.value,
+                })
               }
               placeholder={t("StudentNumber")}
-              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
+              className="rounded border p-2 dark:text-white dark:placeholder:text-white"
               type="text"
             />
+
             <input
               required
               value={userData.parentsPhone}
               onChange={(e) =>
-                setUserData({ ...userData, parentsPhone: e.target.value })
+                setUserData({
+                  ...userData,
+                  parentsPhone: e.target.value,
+                })
               }
               placeholder={t("StudentParentNumber")}
-              className="dark:text-white dark:placeholder:text-white border p-2 rounded"
+              className="rounded border p-2 dark:text-white dark:placeholder:text-white"
               type="text"
             />
-            <div className="w-full max-w-md">
-              <label className="block text-sm font-semibold text-gray-700 mb-2 dark:text-white">
-                {t("StudentCourse")}
-              </label>
 
-              <div className="relative">
-                <select
-                  required
-                  name="course"
-                  onChange={(e) =>
-                    setUserData({ ...userData, courses: [e.target.value] })
-                  }
-                  className="
-        w-full
-         dark:text-white
-        dark:bg-slate-800
-        dark:border-slate-700
-        dark:focus:border-indigo-600
-        dark:focus:ring-indigo-300
-        appearance-none
-        bg-white
-        border
-        border-gray-200
-        rounded-xl
-        px-4
-        py-3
-        pr-10
-        text-gray-700
-        font-medium
-        shadow-sm
-        outline-none
-        cursor-pointer
-        transition
-        focus:border-indigo-500
-        focus:ring-4
-        focus:ring-indigo-100
-        hover:border-indigo-300
-      "
-                >
-                  <option>{t("StudentCourse")}</option>
-                  <option>React + TypeScript</option>
-
-                  <option>Node.js Backend</option>
-
-                  <option>NestJS Advanced</option>
-
-                  <option>Python</option>
-
-                  <option>HTML + CSS</option>
-
-                  <option>React</option>
-
-                  <option>JavaScript</option>
-                </select>
-
-                <span
-                  className="
-        absolute
-        right-4
-        top-1/2
-        -translate-y-1/2
-        text-gray-400
-        pointer-events-none
-        text-sm
-      "
-                >
-                  ▼
-                </span>
-              </div>
-            </div>
             <button
-              className="bg-purple-900 text-white p-2 rounded cursor-pointer font-semibold dark:bg-cyan-800 dark:hover:bg-cyan-700"
+              className="cursor-pointer rounded bg-purple-900 p-2 font-semibold text-white dark:bg-cyan-800 dark:hover:bg-cyan-700"
               type="submit"
             >
               {t("StudentCreateBtn")}
             </button>
           </form>
+
           <button
             onClick={() => dispatch(closeWindow())}
-            className="mt-3 text-gray-500 cursor-pointer dark:text-white"
+            className="mt-3 cursor-pointer text-gray-500 dark:text-white"
           >
             {t("StudentCloseBtn")}
           </button>
@@ -193,4 +178,5 @@ function CreateStudents() {
     </>
   );
 }
+
 export default CreateStudents;
